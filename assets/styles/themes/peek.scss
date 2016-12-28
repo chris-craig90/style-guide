@@ -1,0 +1,52 @@
+// ==========================================================================
+// Peek theme settings 
+// ==========================================================================
+
+// Colors
+// ==========================================================================
+
+// Grey scale
+// --------------------------------------------------------------------------
+$glob-color-grey1: #000000;
+$glob-color-grey2: #2c2c2c;
+$glob-color-grey3: #656567;
+$glob-color-grey4: #c4c2c5;
+$glob-color-grey5: #eaeaea;
+$glob-color-grey6: #f8f4f1;
+$glob-color-grey7: #fbfaf8;
+$glob-color-grey8: #FFFFFF;
+
+// Brand color
+// --------------------------------------------------------------------------
+$glob-color-brand: #de1c34;
+$glob-color-brandLight: lighten( $glob-color-brand, 0.8 );
+$glob-color-brandDark: darken( $glob-color-brand, 0.8 );
+
+// Accent colors
+// --------------------------------------------------------------------------
+$glob-color-accent: #fd8127;
+$glob-color-accentLight: #f6a93d;
+$glob-color-accentDark: #74c0c0;
+
+
+// Element Styles
+// ==========================================================================
+
+// styleguide:ignore:start
+$glob-radius: 0 !default;
+
+$glob-navHor-style: border-strong;
+$glob-nav-prime-active: block; // Navigation active style
+$glob-page-style: flat; // flat shadow
+$glob-card-style: flat; // flat border shadow
+// styleguide:ignore:end
+
+
+// styleguide:ignore:start
+// Fonts
+// ==========================================================================
+
+$glob-font-family: Tahoma, Geneva, sans-serif;
+$glob-font-family-heading: Tahoma, Geneva, sans-serif;
+$glob-font-weight: 700 !default;
+// styleguide:ignore:end

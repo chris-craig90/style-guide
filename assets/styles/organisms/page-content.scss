@@ -1,0 +1,150 @@
+// Page content
+//
+// markup:
+// <sg-insert>3.2.4</sg-insert>
+// <div class="o-page">
+//     <div class="o-page__content">
+//         <main class="o-page__main">
+//         	   <div class="o-page__main__icon"><i class="a-icon-chat"></i></div>
+//             <h1 class="a-heading--bold u-font--mega">Curabitur tortor</h1>
+//             <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. <b>Fusce nec tellus sed augue semper porta</b>. Aenean quam. <i>Lorem ipsum dolor sit amet, consectetur adipiscing elit</i>. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. <b>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos</b>. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
+//             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+//             <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. <i>Curabitur tortor</i>. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. <b>Proin ut ligula vel nunc egestas porttitor</b>. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. </p>
+//         </main>
+//         <aside class="o-page__aside">
+//             <div class="o-page__aside__widget">
+//                 <h2 class="u-font--hecto">Fusce nec tellus</h2>
+//                 <ul class="a-list--links">
+//                    <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//                    <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//                    <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//                 </ul>
+//             </div>
+//         </aside>
+//     </div>
+// </div>
+//
+// Styleguide 4.4
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+// Page color
+// @type String - Should be a color name defined in `$glob-color` map
+$o-page-color: grey6 !default;
+
+
+// ==========================================================================
+// Page content elment
+// ==========================================================================
+
+.o-page { 
+	@include baseline-calc(( 
+		padding-bottom: 7
+	));
+	@include atomic_color((
+		colorName: $o-page-color,
+		backgroundColor : true,
+		textColor : true,
+		iconColor: true,
+		buttonColor: true,
+		utils: true,
+		accentSelector: '.o-page__main__icon *[class*="a-icon"]'
+	));
+
+	// Content wrapper
+	// ==========================================================================
+	// Content wraper for page content and sidebar, extends grid row functinality
+	&__content { 
+		@include flex-grid-row; 
+		@include flex-align(center, top);
+		justify-content: space-between;
+	}
+
+	// Main content
+	// ==========================================================================
+	&__main {
+		psoition: relative;
+		display: block;
+		padding: 0;
+		@include flex-grid-column(12 of 12);
+		@include breakpoint(medium){ @include flex-grid-column(7 of 12); }
+		@include breakpoint(large){ @include flex-grid-column(7 of 12); }
+		@include baseline-calc(( padding-top: 7, ));
+		@include baseline-calc(( padding-bottom: 7 ), medium);
+
+		// Nested rows
+		> .row {
+			margin-left: map-get($grid-column-gutter, small) * -0.5;
+    		margin-right: map-get($grid-column-gutter, small) * -0.5;
+		}
+	}
+
+	// Aside
+	// ==========================================================================
+	&__aside {
+		psoition: relative;
+		display: block;
+		@include grid-column(12 of 12);
+		@include breakpoint(medium){ @include grid-column(5 of 12); }
+		@include breakpoint(large){ @include grid-column(4 of 12); }
+		@include baseline-calc(( padding-bottom: 7 ));
+		@include baseline-calc(( padding-top: 7 ), medium);
+
+		// Widget
+		&__widget {
+			position: relative;
+			display: block;
+			@include  baseline-border( "top", 6px, 0, $type: "margin" );
+			@include baseline-calc(( 
+				padding-bottom: 4,
+				padding-top: 2,
+				margin-bottom: 8
+			));
+			border-color: $glob-color-accent;
+		}
+	}
+}
+
+// Extend claass's for wp widgets
+// ==========================================================================
+// .widget { 
+// 	@extend .o-page__aside__widget; 
+// 	> ul { @extend .a-list--links; }
+// 	> ul > li a { @extend .u-font--prime; }
+// }
+// .widget > h3 { @extend .u-font--hecto; }
+
+
+// Content icon 
+// ==========================================================================
+// Icon used to idnicate type of post.
+// If bread crum is present for icon to overlao
+// Hide on small screens
+
+.o-page__main__icon {
+	position: relative;
+	display: none;
+    align-items: center;
+    justify-content: center;
+	float: right;
+	padding-top: 0!important;
+	padding-bottom: 0!important;
+	@include baseline-calc((
+		font-size: 20,
+	), large);
+	@include breakpoint(large){
+		display: flex;
+	}
+}
+.m-navBread + .o-page .o-page__main__icon {
+	@include baseline-calc((
+		margin-top: -15,
+	), large);
+}
+
+
+// styleguide:ignore:end

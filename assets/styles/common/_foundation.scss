@@ -1,0 +1,85 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// Foundation 6
+// ==========================================================================
+//
+// 1. Settings
+// 2. Modules
+
+
+// 1. Settings
+// ==========================================================================
+// Override !default foundation settings
+
+// Global
+// --------------------------------------------------------------------------
+$global-width: rem-calc($glob-max-site-width);
+
+// Breakpoints
+// --------------------------------------------------------------------------
+$breakpoints: (
+  small: 0,
+  medium: 640px,
+  large: 1024px,
+  xlarge: 1200px,
+  xxlarge: 1600px,
+);
+$breakpoint-classes: (small medium large xlarge xxlarge);
+
+// The Grid
+// --------------------------------------------------------------------------
+$grid-row-width: $global-width;
+$grid-column-count: 12;
+$grid-column-gutter: (
+  small: $glob-guuter-width-small,
+  medium: $glob-guuter-width-medium,
+);
+$grid-column-align-edge: true;
+$block-grid-max: 8;
+
+
+// 2. Initalize foundation 6 modules
+// ==========================================================================
+// Uncomment the components need for the project
+
+//@include foundation-global-styles;
+// @include foundation-grid;
+@include foundation-flex-classes;
+@include foundation-flex-grid;
+// @include foundation-typography;
+// @include foundation-forms;
+// @include foundation-button;
+@include foundation-visibility-classes;
+// @include foundation-float-classes;
+// @include foundation-accordion;
+// @include foundation-accordion-menu;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+// @include foundation-callout;
+// @include foundation-close-button;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown;
+// @include foundation-dropdown-menu;
+// @include foundation-flex-video;
+// @include foundation-label;
+// @include foundation-media-object;
+// @include foundation-menu;
+// @include foundation-menu-icon;
+// @include foundation-off-canvas;
+// @include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-slider;
+// @include foundation-sticky;
+// @include foundation-reveal;
+// @include foundation-switch;
+// @include foundation-table;
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
+
+// styleguide:ignore:end

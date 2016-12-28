@@ -1,0 +1,244 @@
+// Card strucutre
+//
+// markup:
+// <div class="m-card">
+//     <div class="m-card__thumb">
+//         <sg-insert>1.4.2</sg-insert>
+//     </div>
+//     <div class="m-card__text">
+//         <div class="m-card__text__title">
+//             <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//         </div>
+//         <div class="m-card__text__desc">
+//             <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//         </div>
+//         <div class="m-card__text__cta">
+//             <a href="#">Fusce elementum</a>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <div class="row u-bg--grey6 u-pb--1 u-pt--1">
+//     <div class="medium-7 columns">
+//         <sg-wrapper-content/>
+//     </div>
+// </div>
+//
+// Styleguide 3.1.1
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// @mixin Card structre
+// ==========================================================================
+
+@mixin m-card-stucture() {
+	a.#{$cardClass},
+	.#{$cardClass} {
+		position: relative;
+	    display: flex;
+	    flex-direction: column;
+	    width: 100%;
+	    max-width: 100%;
+	    border-radius: $m-card-border;
+	    overflow: hidden;
+	    text-decoration: none; // Rremove defualt underline if card is an <a>
+
+		// Colors
+		// --------------------------------------------------------------------------
+		// Defaut color
+		@include atomic-color( map-merge($m-card-color-settings, (colorName: 'grey8', utils: true)) );
+		// Color modifiers
+		&--dark { @include atomic-color( map-merge($m-card-color-settings, (colorName: 'grey2', utils: true)) ); }
+		&--grey { @include atomic-color( map-merge($m-card-color-settings, (colorName: 'grey5', utils: true)) ); }
+		&--brand { @include atomic-color( map-merge($m-card-color-settings, (colorName: 'brand', utils: true)) ); }
+		&--accentDark { @include atomic-color( map-merge($m-card-color-settings, (colorName: 'accentDark', utils: true)) ); }
+		&--accent { @include atomic-color( map-merge($m-card-color-settings, (colorName: 'accent', utils: true)) ); }
+
+		// Card styles
+		// --------------------------------------------------------------------------
+		@include atm_card_style($m-card-style);
+
+		// No need to reprodce the style modifer if its allready applied by defualt
+		@if ( $m-card-style != shadow ) { 
+			&--shadow { @include atm_card_style(shadow); }
+		}
+		@if ( $m-card-style != border ) { 
+			&--border { @include atm_card_style(border); }
+		}
+
+		// Thumbnail
+		// ==========================================================================
+		&__thumb {
+			position: relative;
+			display: block;
+			margin: 0 auto;
+			max-width: 100%;
+			width: 100%;
+			height: auto;
+			overflow: hidden;
+			z-index: 0;
+			> img {
+				position: relative;
+    			display: block;
+				width: 100%;
+				height: auto;
+				border-radius: $m-card-border $m-card-border 0 0;
+			}
+			> iframe {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+			
+			.twitter-tweet {
+				margin: 0!important;
+			    width: 100%!important;
+			}
+		}
+
+		// Text container
+		// ==========================================================================
+		&__text {
+			display: flex;
+		    flex-direction: column;
+		    justify-content: flex-start;
+		    height: auto;
+    		flex: 1;
+		    z-index: 2;
+			&__title {
+				flex-basis: auto;
+				@include baseline-calc(( padding: 4 ));
+				padding-bottom: 0;
+				& + .#{$cardClass}__text__desc { padding-top: 0; }
+			}
+			&__desc {
+				display: flex;
+	    		flex-direction: column;
+	    		margin-bottom: auto;
+	    		@include baseline-calc(( padding: 4 ));
+				p:last-child { padding-bottom: 0; }
+			}
+			&__cta {
+				order: 6;
+				display: block;
+				margin-top: auto;
+				width: 100%;
+				flex-basis: auto;
+				@include baseline-calc(( 
+					padding: 4,
+					padding-top: 3,
+					padding-bottom: 3
+				));
+				//@include baseline-border( "top", 1px, 0, $type: "margin" );
+				a:not([class]) { text-decoration: underline; }
+			}
+		}
+
+		// Card height
+		// Set a min height to card text element
+		// --------------------------------------------------------------------------
+		&--mid .#{$cardClass}__text { @include baseline-calc(( min-height: 55 )); }
+		&--large .#{$cardClass}__text { @include baseline-calc(( min-height: 75 )); }
+		&--xl .#{$cardClass}__text { @include baseline-calc(( min-height: 106 )); }
+
+		// Card padding
+		// Set a min height to card text element
+		// --------------------------------------------------------------------------
+		&--padMid .#{$cardClass}__text { 
+			@include baseline-calc(( padding: 1 ), medium); 
+			@include baseline-calc(( padding: 4 ), large); 
+		}
+		&--padLarge .#{$cardClass}__text { @include baseline-calc(( padding: 10 )); }
+
+		// Card Hover states
+		// --------------------------------------------------------------------------
+		@if $m-card-hover-effect == thumbLight {
+			// Card Thumb Hover effect
+			.#{$cardClass}__thumb:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(to bottom, rgba($glob-color-grey6, 0.3) 0%, rgba($glob-color-grey6, 0.6) 100%);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity .25s $glob-anim-fade;
+			}
+			&:hover .#{$cardClass}__thumb:after { opacity: 1; } 
+		}
+		@if $m-card-hover-effect == shadow {
+			transition: box-shadow .3s $glob-anim-fade;
+			&:hover { 
+				box-shadow: $glob-shadow--l3; 
+				z-index: 50;
+			}
+		}
+	}
+
+	// Left right thumb nail, stretch to content usign object-fit
+	.objectfit [class*="#{$cardClass}--thumbLeft"] img, 
+	.objectfit [class*="#{$cardClass}--thumbRight"] img {
+		object-fit: cover;
+	    object-position: center;
+	}
+	.objectfit [class*="#{$cardClass}--thumbLeft"] .#{$cardClass}__thumb img { height: 100%!important; }
+	.objectfit [class*="#{$cardClass}--thumbRight"] .#{$cardClass}__thumb img { height: 100%!important; }
+}
+
+
+// ==========================================================================
+// @mixin Card styles
+// ==========================================================================
+// Card style mixin, allows for card style to be applied applied as defualt 
+// or using modifer class's
+// @param $cardStyle {string} - flat border shadow
+
+@mixin atm_card_style( $cardStyle ) {
+	@if ( $cardStyle == border ) {
+		border-radius: 0;
+		overflow: visible;
+		margin-bottom: -1px;
+		// Card top
+		.#{$cardClass}__text {
+			@include baseline-border( "both", 1px, 0, $type: "margin" );
+			border-width: 0 1px 1px 1px!important;
+			border-radius: 0 0 $m-card-border $m-card-border;
+		}
+		// Card top
+		.#{$cardClass}__text {
+			@include baseline-border( "both", 1px, 0, $type: "margin" );
+			border-width: 1px 1px 1px 1px!important;
+			border-radius: 0 0 $m-card-border $m-card-border;
+			margin-bottom: 0;
+		}
+		&.#{$cardClass}--thumbBottom .#{$cardClass}__text {
+			@include baseline-border( "both", 1px, 0, $type: "margin" );
+			border-width: 1px 1px 0 1px!important;
+			border-radius: $m-card-border $m-card-border 0 0;
+			margin-bottom: 0;
+		}
+		&.#{$cardClass}--thumbRight .#{$cardClass}__text {
+			@include baseline-border( "both", 1px, 0, $type: "margin" );
+			border-width: 1px 0 1px 1px !important;
+			border-radius: $m-card-border 0 0 $m-card-border;
+			margin-bottom: 0;
+		}
+		&.#{$cardClass}--thumbLeft .#{$cardClass}__text {
+			@include baseline-border( "both", 1px, 0, $type: "margin" );
+			border-width: 1px 1px 1px 0 !important;
+			border-radius: 0 $m-card-border $m-card-border 0;
+			margin-bottom: 0;
+		}
+	}
+	@if ( $cardStyle == shadow ) {
+		box-shadow: $m-card-shadow;
+	}
+}
+
+// styleguide:ignore:end

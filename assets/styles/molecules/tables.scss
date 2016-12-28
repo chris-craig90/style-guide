@@ -1,0 +1,147 @@
+// Tables
+//
+// sg-wrapper:
+// <div class="js-gridOverlay"><sg-wrapper-content/></div>
+//
+// Styleguide 3.7
+
+// Data tables
+//
+// markup:
+// <table class="m-table--data">
+//     <thead>
+//         <tr>
+//             <th class="meta">ID</th>
+//             <th class="meta">Name</th>
+//             <th class="meta">Link</th>
+//             <th class="meta">Status</th>
+//         </tr>
+//     </thead>
+//     <tbody>
+//         <tr>
+//             <td data-title="ID">1</td>
+//             <td data-title="Name">Material Design Color Palette</td>
+//             <td data-title="Link">
+//                 <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank">GitHub</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">2</td>
+//             <td data-title="Name">Material Design Iconic Font</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/uqCsB" target="_blank">Codepen</a>
+//                 <a href="https://github.com/zavoloklom/material-design-iconic-font" target="_blank">GitHub</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">3</td>
+//             <td data-title="Name">Material Design Hierarchical Display</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/eNaEBM" target="_blank">Codepen</a>
+//                 <a href="https://github.com/zavoloklom/material-design-hierarchical-display" target="_blank">GitHub</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">4</td>
+//             <td data-title="Name">Material Design Sidebar</td>
+//             <td data-title="Link"><a href="http://codepen.io/zavoloklom/pen/dIgco" target="_blank">Codepen</a></td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">5</td>
+//             <td data-title="Name">Material Design Tiles</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/wtApI" target="_blank">Codepen</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">6</td>
+//             <td data-title="Name">Material Design Typography</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/IkaFL" target="_blank">Codepen</a>
+//                 <a href="https://github.com/zavoloklom/material-design-typography" target="_blank">GitHub</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">7</td>
+//             <td data-title="Name">Material Design Buttons</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/Gubja" target="_blank">Codepen</a>
+//             </td>
+//             <td data-title="Status">In progress</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">8</td>
+//             <td data-title="Name">Material Design Form Elements</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/yaozl" target="_blank">Codepen</a>
+//             </td>
+//             <td data-title="Status">In progress</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">9</td>
+//             <td data-title="Name">Material Design Email Template</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/qEVqzx" target="_blank">Codepen</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//         <tr>
+//             <td data-title="ID">10</td>
+//             <td data-title="Name">Material Design Animation Timing (old one)</td>
+//             <td data-title="Link">
+//                 <a href="http://codepen.io/zavoloklom/pen/Jbrho" target="_blank">Codepen</a>
+//             </td>
+//             <td data-title="Status">Completed</td>
+//         </tr>
+//     </tbody>
+// </table>
+//
+// sg-wrapper:
+// <div class="row u-pr--2 u-pl--2 u-pt--2 u-pb--2 u-bg--grey8">
+//    <div class="column"><sg-wrapper-content/></div>
+// </div>
+//
+// Styleguide 3.7.1
+
+// styleguide:ignore:start
+.m-table--data {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+  border-color: inherit;
+
+  // table head
+  thead{
+    @include  baseline-border( "bottom", 1px, 0 );
+    border-color: inherit;
+  }
+
+  // Table Rows
+  tr{
+      transition: background $glob-anim-fade .25s, color $glob-anim-fade .25s;
+      &:hover{ 
+        @include atomic_color(( colorName: grey5 ));
+      }
+  }
+
+  // Table cells
+  th,
+  td{
+    text-align: left;
+    border: none;
+    @include baseline-calc((
+        padding-top: 2,
+        padding-bottom: 2,
+        padding-right: 4,
+        padding-left: 4
+    ));
+  }
+
+}
+// styleguide:ignore:end

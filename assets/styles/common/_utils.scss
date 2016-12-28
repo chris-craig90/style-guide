@@ -1,0 +1,28 @@
+// ==========================================================================
+// General utility class's
+// ==========================================================================
+
+// Shadows
+// ==========================================================================
+.u-shadow--l1 { box-shadow: $glob-shadow--l1; }
+.u-shadow--l2 { box-shadow: $glob-shadow--l2; }
+.u-shadow--l3 { box-shadow: $glob-shadow--l3; }
+.u-shadow--l4 { box-shadow: $glob-shadow--l4; }
+.u-shadow--l5 { box-shadow: $glob-shadow--l5; }
+
+
+// z-index
+// ==========================================================================
+.u-zindex--high { z-index: 1000; }
+
+
+// Offset
+// ==========================================================================
+.u-offset-top--large { @include baseline-calc(( margin-top: -10 ), medium); }
+
+
+// Text
+// ==========================================================================
+.u-txt-dec--none { text-decoration: none; }
+.u-txt-upper { text-transform: uppercase; }
+.u-txt-bold { font-weight: bold; }

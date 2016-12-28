@@ -1,0 +1,168 @@
+// Acorrdion
+//
+// markup:
+// <nav class="m-navAccord">
+//     <h1 class="u-txt-sec">Heading</h1>
+//     <ul role="menu">
+//         <li>
+//             <a class="u-txt-sec">Design</a>
+//             <ul>
+//                 <li><a href=#" class="u-txt-prime">Typography</a></li>
+//                 <li><a href=#" class="u-txt-prime">Grid system</a></li>
+//                 <li><a href=#" class="u-txt-prime">Color</a></li>
+//                 <li><a href=#" class="u-txt-prime">Design Tokens</a></li>
+//                 <li><a href=#" class="u-txt-prime">Images</a></li>
+//             </ul>
+//         </li>
+//         <li>
+//             <a class="u-txt-sec">Advanced</a>
+//             <ul role="menu">
+//                 <li><a href=#" class="u-txt-prime">Menu Title Attribute</a></li>
+//                 <li><a href=#" class="u-txt-prime">Menu CSS Class</a></li>
+//                 <li><a href=#" class="u-txt-prime">Menu Description</a></li>
+//                 <li><a href=#" class="u-txt-prime">New Window / Tab</a></li>
+//             </ul>
+//         </li>
+//         <li><a href=#" class="u-txt-sec">Breakpoints</a></li>
+//         <li><a href=#" class="u-txt-sec">Grid</a></li>
+//         <li><a href=#" class="u-txt-sec">Surface behaviors</a></li>
+//         <li><a href=#" class="u-txt-sec">Patterns</a></li>
+//     </ul>
+// </nav>
+//
+// Styleguide 3.2.2
+
+// styleguide:ignore:start
+
+// Menu Items
+// ==========================================================================
+
+@mixin o-nav-accord-listItems() {
+	> ul li {
+        position: relative;
+        display: block;
+        list-style: none;
+        padding: 0;
+        transition: background-color 0.25s $glob-anim-fade, color 0.2s $glob-anim-fade, border-color 0.2s $glob-anim-fade;
+		
+        // Links
+        // --------------------------------------------------------------------------
+        a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            @include baseline-calc(( 
+            	padding: 3, 
+            	padding-left: 5 
+            ));
+            @include  baseline-border( "bottom", 1px, 0, $type: "margin" );
+            border-color: inherit;
+            transition: background .25s $glob-anim-fade, border-color .25s $glob-anim-fade;
+            text-decoration: none;
+        }
+    }
+    
+    // Hover state
+        // --------------------------------------------------------------------------
+	> ul > li {
+		&:hover,
+		&:focus { 
+			@include atomic-color(( colorName: 'brand', primeSelector: '> a' )); 
+			//border-color: transparent !important;
+			a { color: inherit; }
+		}
+	}
+}
+
+
+// Drop down
+// ==========================================================================
+
+@mixin o-nav-accord-dropDown() {
+	> ul li > ul {
+        position: relative;
+        display: block;
+        padding: 0;
+        transition: max-height .2s $glob-anim-grow;
+        //box-shadow: $tk-shadow--inset;
+        
+        // List items
+        // --------------------------------------------------------------------------
+        > li { 
+        	display: none; // This allows us to see the chevron icon when menu is closed
+        	a {
+        		border-width: 0;
+        		margin-bottom: 0;
+        		@include baseline-calc(( padding-left: 10 ));
+        	}
+        	// Hover state
+			&:hover,
+			&:focus { 
+				@include atomic-color(( colorName: 'brandLight', primeSelector: '> a' )); 
+				border-color: transparent !important;
+			}
+        }
+
+        // Chevron icon
+        // --------------------------------------------------------------------------
+        // Add to <ul> instead of <a> to maintain basic vert nav strucutre,
+        // Detecting child elements is not possible with vannilla CSS
+
+        &:before {
+        	content: '\ea5d';
+            position: absolute;
+            pointer-events: none;
+            font-family: 'a-icon';
+            margin: 0;
+            padding: 0;
+            @include baseline-calc((
+                right: 3,
+                top: -6.9
+            ));
+            @include font-sizes("deca", false);
+            transition: transform .2s  $glob-anim-spin;
+        }
+        
+        // Only allow one level deep
+        ul { display: none; }
+    }
+
+    // Open Sub menu
+    .m-navAccord\@open + ul {
+        &:before { transform: rotate(90deg); } // Rotae cehvron icon
+        > li { display: block; } // Show child <li>
+    }
+}
+
+
+// Build mixin
+// ==========================================================================
+
+@mixin m-navAccord() {
+	.m-navAccord {
+	    // Main menu
+	    > ul {
+	        position: relative;
+	        display: block;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0;
+	    }
+
+	    // Nav heading vissible to screen readers only
+	    h1 { @extend .show-for-sr; }
+
+	    @include o-nav-accord-listItems();
+		@include o-nav-accord-dropDown();
+
+	    // Color modifers
+	    // --------------------------------------------------------------------------
+
+	    @include atomic-color(( colorName: 'grey8', primeSelector: 'a' ));
+	    // Sub menu color
+	    > ul > li > ul { @include atomic-color(( colorName: 'grey6', primeSelector: 'a' )); }
+	}
+}	
+
+// styleguide:ignore:end

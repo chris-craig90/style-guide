@@ -1,0 +1,59 @@
+// Templates
+//
+// sg-wrapper:
+// <div class="sg-preview">
+// <div class="siteWrap">
+//     <div class="siteWrap__sideBar">
+// 	       <sg-insert>4.6</sg-insert>
+//     </div>
+//     <div class="siteWrap__main">
+//         <!-- Header -->
+//         <sg-insert>4.1.2</sg-insert>
+//         <sg-wrapper-content/>
+//         <sg-insert>6.1.1</sg-insert>
+//         <!-- Footer -->
+//         <sg-insert>4.2-2</sg-insert>
+//     </div>
+// </div>
+// </div>
+//
+// Styleguide 5
+
+
+// Home page templates
+//
+// Styleguide 5.1
+
+// ==========================================================================
+@import "home/home-basic";
+@import "home/home-peek";
+// ==========================================================================
+
+
+// Post page templates
+//
+// Styleguide 5.2
+
+// ==========================================================================
+@import "posts/post-peek";
+// ==========================================================================
+
+
+// Archive page templates
+//
+// Styleguide 5.3
+
+// ==========================================================================
+@import "archive/peek-archive";
+// ==========================================================================
+
+
+// Contact page templates
+//
+// Styleguide 5.4
+
+// ==========================================================================
+@import "contact/contact-basic";
+@import "contact/contact-peek";
+// ==========================================================================
+

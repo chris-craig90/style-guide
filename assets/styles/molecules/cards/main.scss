@@ -1,0 +1,32 @@
+// Cards
+//
+// Styleguide 3.1
+
+
+// ==========================================================================
+// Imports
+// ==========================================================================
+@import "variables";
+@import "structure";
+@import "styles";
+@import "alignment";
+@import "examples";
+@import "group";
+
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// @mixin m-card
+// ==========================================================================
+// Main card mixin, should be executed in a an external file.
+
+@mixin m-card(){
+	@include m-card-stucture();
+	@include m-card-alignment-responsive();
+	@include m-card-styles();
+	@include m-card_misc-els();
+}
+
+// styleguide:ignore:end
+

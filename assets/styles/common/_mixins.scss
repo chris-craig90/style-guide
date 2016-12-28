@@ -1,0 +1,15 @@
+// ==========================================================================
+// Mixins & functions
+// ==========================================================================
+
+// Get map name by value
+// ==========================================================================
+@function mapValue( $map, $mapValue ) {
+	@each $name, $value in $map {
+		@if ( $mapValue == $value ) {
+			@return $name;
+		}
+	}
+	@debug( 'no value map name was found' );
+	@return '';
+}

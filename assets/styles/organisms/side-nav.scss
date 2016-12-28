@@ -1,0 +1,128 @@
+// Side nav
+//
+// markup:
+// <div class="o-sidenav">
+//     <div class="o-sidenav__header">
+//         <div class="o-sidenav__header__logo">
+//             <a href="/styleguide/#/section/5.1/fullscreen"><img src="/dist/images/demo/placeholder/logo/logo-dark.svg"></a>
+//         </div>
+//         <button class="o-sidenav__header__close js-sideToggle">
+//             <i class="a-icon-close a-icon--large"></i>
+//         </button>
+//     </div>
+//     <div class="o-sidenav__content">
+//         <sg-insert>3.2.2</sg-insert>
+//     </div>
+// </div>
+// <div class="o-sidenav__overlay"></div>
+//
+// sg-wrapper:
+// <div class="sg-preview"><sg-wrapper-content/></div>
+//
+// Styleguide 4.6
+
+// ==========================================================================
+// Vaiables
+// ==========================================================================
+
+// Class name
+// @type String
+$atm-sidebNav-class: 'o-sidenav' !default;
+
+
+// ==========================================================================
+// Side nav
+// ==========================================================================
+
+@mixin o-sideNav() {
+	.#{$atm-sidebNav-class} {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100%;
+		z-index: 20;
+		overflow: auto;
+		@include atomic_color(( 
+			colorName: grey8,
+			primeSelector: 'a'
+		));
+
+		// Header
+		// ==========================================================================
+		&__header {
+			position: relative;
+			display: flex;
+			align-items: stretch;
+			@include baseline-calc((
+				height: 12
+			));
+
+			// Logo
+			// --------------------------------------------------------------------------
+			&__logo{
+				position: relative;
+				display: flex;
+	    		justify-content: center;
+				align-items: center;
+				max-width: 180px;
+				@include baseline-calc(( padding: 2 ));
+				
+				// Fixed IE issue with Image width inside an anchor
+				a,
+				img { 
+					display: block; 
+					width: auto;
+					height: 100%;
+				}
+			}
+
+			// Close
+			// --------------------------------------------------------------------------
+			&__close {
+				position: relative;
+				display: flex;
+	    		justify-content: center;
+				align-items: stretch;
+				border-width: 0 0 0 1px;
+				border-style: solid;
+				border-color: inherit;
+				margin-left: auto;
+				min-width: 80px;
+				@include baseline-calc(( padding: 2 ));
+				transition: background-color 0.2s $glob-anim-fade, 
+							color 0.2s $glob-anim-fade;
+
+				&:hover{ 
+					@include atomic_color((
+					    colorName: grey5,
+					    backgroundColor : true,
+					    textColor : true
+					));
+				}
+			}
+		}
+		
+		// Content
+		// ==========================================================================
+		&__content {
+			@include baseline-border( "top", 1px, 0, $type: "margin" );
+		}
+
+		// Overlay
+		// ==========================================================================
+		&__overlay {
+			content: '';
+			position: fixed;
+			width: 100vw;
+			height: 100vh;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			z-index: 100;
+			opacity: 0;
+			@include atomic-color(( colorName: 'grey1', backgroundColor: false, textColor: false, transBG: true, alpha:  0.9 ));
+			transition: opacity .2s $glob-anim-fade;
+		}
+	}
+}

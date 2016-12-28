@@ -1,0 +1,64 @@
+// Search
+//
+// markup:
+// <div class="o-searchScreen">
+//     <button class="o-searchScreen__close js-openSearch"><i class="a-icon-close a-icon--block"></i></button>
+//     <div class="o-searchScreen__form"><sg-insert>3.4.2.2</sg-insert></div>
+// </div>
+//
+// sg-wrapper:
+// <div class="sg-preview"><sg-wrapper-content/></div>
+// <style>.o-searchScreen{ display: block; }</style>
+//
+// Styleguide 4.5
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Search screen
+// ==========================================================================
+
+.o-searchScreen {
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	@include atomic_color(( colorName: grey8 ));
+
+	// Show search screen
+	&--open {
+		display: block;
+	}
+
+	// Close
+	// ==========================================================================
+	&__close {
+		position: relative;
+		float: right;
+		padding: 0;
+		margin: 0;
+		@include font-sizes("mega");
+		@include baseline-calc((
+			margin-left: 4,
+			margin-right: 4,
+			margin-top: 4
+		));
+	}
+	
+	// Search form
+	// ==========================================================================
+	&__form {
+		@include baseline-calc((
+			margin-left: 4,
+			margin-right: 4,
+		));
+	}
+
+	// Ttile
+	// ==========================================================================
+	
+}
+// styleguide:ignore:end

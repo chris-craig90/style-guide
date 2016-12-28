@@ -1,0 +1,88 @@
+// Card alignmnet
+//
+// .m-card--thumbBottom - Thumb bottom
+// .m-card--thumbRight - Thumb right
+// .m-card--thumbLeft - Thumb left
+// .m-card--thumbLeft@large.m-card--thumbLeft@large--thumbSmall - Thumb left, small thumb
+// .m-card--thumbRight@large.m-card--thumbRight@large--thumbSmall - Thumb right, small thumb
+//
+// markup:
+// <div class="m-card {$modifiers}">
+//     <div class="m-card__thumb">
+//         <sg-insert>1.4.2</sg-insert>
+//     </div>
+//     <div class="m-card__text">
+//         <div class="m-card__text__title">
+//             <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//         </div>
+//         <div class="m-card__text__desc">
+//             <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//         </div>
+//         <div class="m-card__text__cta">
+//             <a href="#">Fusce elementum</a>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <div class="row u-bg--grey6 u-pb--1 u-pt--1">
+//     <div class="medium-7 columns">
+//         <sg-wrapper-content/>
+//     </div>
+// </div>
+//
+// Styleguide 3.1.2
+
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// @mixin m-card-alignment
+// ==========================================================================
+// @param $postFix {string} - Postfix class to be added to the end of auto generated modfier class's. 
+// Usefull for genrating responive modifiers.
+
+@mixin m-card-alignment($postFix: '') {
+	.#{$cardClass}--thumbBottom#{$postFix} { flex-direction: column-reverse; }
+	.#{$cardClass}--thumbRight#{$postFix},
+	.#{$cardClass}--thumbLeft#{$postFix} {
+		flex-wrap: nowrap;
+		flex-direction: row;
+		.#{$cardClass}__text,
+		.#{$cardClass}__thumb {
+			width: 50%; 
+			height: auto!important;
+		}
+		// Small thumb
+		&--thumbSmall {
+			.#{$cardClass}__thumb { width: 40%; }
+			.#{$cardClass}__text { width: 60%; }
+		}
+		// Large thumb
+		&--thumbLarge {
+			.#{$cardClass}__thumb { width: 70%; }
+			.#{$cardClass}__text { width: 30%; }
+		}
+	}
+	.#{$cardClass}--thumbLeft#{$postFix} .#{$cardClass}__thumb > img {  border-radius: $m-card-border 0 0 $m-card-border; }
+	.#{$cardClass}--thumbRight#{$postFix} { 
+		flex-direction: row-reverse;
+		.#{$cardClass}__thumb > img {border-radius: 0 $m-card-border $m-card-border 0; }
+	}
+	.#{$cardClass}--thumbBottom#{$postFix} { 
+		.#{$cardClass}__thumb > img { border-radius: 0 0 $m-card-border $m-card-border; }
+	}
+}
+
+
+// @mixin m-card-alignment-responsive
+// ==========================================================================
+// Used in conjubction with m-card-alignment, this respsnive helper mixin generates class's for responsive card alignments.
+
+@mixin m-card-alignment-responsive() {
+	@include m-card-alignment(); 
+	@include breakpoint(medium) { @include m-card-alignment(\@medium); }
+	@include breakpoint(large) { @include m-card-alignment(\@large); }
+}
+
+// styleguide:ignore:end

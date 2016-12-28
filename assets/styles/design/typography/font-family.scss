@@ -1,0 +1,35 @@
+// ==========================================================================
+// Vartibles
+// ==========================================================================
+
+// Font fmialy
+// @type - Font stack
+$atm_font-family : $glob-font-family !default;
+
+// Heading font family
+// @type - Font stack
+$atm_font-family-heading : $glob-font-family-heading !default;
+
+// ==========================================================================
+// Font family
+// ==========================================================================
+
+@import "font-face/robotto";
+
+
+// ==========================================================================
+// Apply font family
+// ==========================================================================
+
+body {
+	font-family: $atm_font-family;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.u-font--heading { 
+	font-family: $atm_font-family-heading;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

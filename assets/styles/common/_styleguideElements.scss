@@ -1,0 +1,55 @@
+// ==========================================================================
+// Styleguide elemtns
+// ==========================================================================
+//
+// 1. Global SC5 resets
+// 2. Color swatch
+// 3. Grid unit
+
+@mixin styleGuideElements () {
+
+// 1. Global SC5 resets
+// ==========================================================================
+body.sg,
+ui-view.ng-scope,
+shadow-dom.ng-scope{
+    height: auto;
+    position: relative;
+    display: block;
+}
+
+
+// 2. Color swatch
+// ==========================================================================
+.sg-colorSwatch {
+	@include baseline-calc(( padding: 4 ));
+}
+
+
+// 3. Grid unit
+// ==========================================================================
+.sg-gridUnit {
+	pointer-events: none;
+    @include baseline-calc(( padding: 4 ));
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
+}
+
+
+// 4. Page strucutre
+// ==========================================================================
+.sg-#{$page-wrapper-class} .#{$page-wrapper-class}__sideBar { 
+    @include atomic-color(( colorName:grey6, buttonColor: true )); 
+}
+.sg-#{$page-wrapper-class} .#{$page-wrapper-class}__main { 
+    @include atomic-color(( colorName:grey8, buttonColor: true )); 
+}
+.sg-wraper .sg-#{$page-wrapper-class} .#{$page-wrapper-class}__main,
+.sg-wraper .sg-#{$page-wrapper-class} .#{$page-wrapper-class}__sideBar {
+    min-height: 200px;
+    max-height: 200px;
+}
+
+}

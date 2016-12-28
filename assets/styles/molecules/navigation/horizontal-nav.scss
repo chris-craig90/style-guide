@@ -1,0 +1,391 @@
+// Horizontal
+//
+// .m-navHor - Basic navigation
+// .m-navHor--brand - Border navihggtion
+// .m-navHor--dark - Dark
+// .m-navHor--flat.m-navHor--brand - Flat navigation
+//
+// markup:
+// <nav class="m-navHor {$modifiers}" role="menubar">
+//     <ul>
+//         <li>
+//             <a class="u-font--prime" data-toggle="test-drop" href="#">Facere</a>
+//             <div class="m-dropList" id="test-drop" data-dropdown>
+//                 <ul>
+//                     <li class="m-dropList__parent"><a href="#">Facere alias</a></li>
+//                     <li><a href="#">Facere alias</a></li>
+//                     <li><a href="#">Itaque</a></li>
+//                     <li><a href="#">voluptatum</a></li>
+//                     <li><a href="#">dipisicing</a></li>
+//                     <li><a href="#">molestiae</a></li>
+//                     <li><a href="#">perferendis</a></li>
+//                 </ul>
+//             </div>
+//         </li>
+//         <li>
+//             <a class="u-font--prime active" data-toggle="test-drop2" href="#">Itaque</a>
+//             <div class="m-dropList" id="test-drop2" data-dropdown>
+//                 <ul>
+//                     <li><a href="#">Facere alias</a></li>
+//                     <li><a class="active" href="#">Itaque</a></li>
+//                     <li><a href="#">voluptatum</a></li>
+//                     <li><a href="#">dipisicing</a></li>
+//                     <li><a href="#">molestiae</a></li>
+//                     <li><a href="#">perferendis</a></li>
+//                 </ul>
+//             </div>
+//         </li>
+//         <li><a class="u-font--prime" href="#">voluptatum</a></li>
+//         <li><a class="u-font--prime" href="#">dipisicing</a></li>
+//         <li><a class="u-font--prime" href="#">molestiae</a></li>
+//         <li>
+//         <a class="u-font--prime" href="#">perferendis</a>
+//             <ul>
+//                 <li><a class="u-font--prime" href="#">Facere</a></li>
+//                 <li><a class="u-font--prime" href="#">Itaque</a></li>
+//                 <li><a class="u-font--prime" href="#">voluptatum</a></li>
+//                 <li><a class="u-font--prime" href="#">dipisicing</a></li>
+//                 <li><a class="u-font--prime" href="#">molestiae</a></li>
+//                 <li><a class="u-font--prime" href="#">perferendis</a></li>
+//             </ul>
+//         </li> 
+//     </ul>
+// </nav>
+//
+// Styleguide 3.2.1
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Varaibales
+// ==========================================================================
+
+// Defualt navigation style
+// @type String - border, transparent
+$atm-navHor-style: $glob-navHor-style !default;
+
+// Active state style
+// @type String - border, block
+$atm-navHor-active: $glob-nav-prime-active !default;
+
+// Mimimum height
+// @type Number - Baseline calc multiplier
+$atm-nav-height: 4 !default;
+
+// Drop down class name
+// @type String
+$atm-dropList-class: 'm-dropList' !default;
+
+// Drop down width
+// @type String
+$atm-dropList-width: 240px !default;
+
+
+// ==========================================================================
+// Top Level Links
+// ==========================================================================
+
+@mixin atm_navHor_topLevel() {
+
+	// Top level list
+	// ==========================================================================§
+
+	> ul {
+		display: none;
+		flex-direction: row;
+		flex-wrap: no-wrap;
+		align-items: stretch;
+		justify-content: flex-start;
+		@include flex-grid-column();
+		flex: 2 2 auto;
+		@include breakpoint( large ) {
+			display: flex;
+		}
+		// overflow-x: auto;
+	}
+
+	// Top level list items
+	// ==========================================================================
+
+	> ul > li {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;		
+		&:last-child { border-right: none; }
+	}
+
+	// Top level links
+	// ==========================================================================
+
+	> ul > li > a,
+	> ul > li > button {
+	    display: flex;
+	    align-items: center;
+	    height: 100%;
+	    @include baseline-calc((
+			padding-left: 1,
+			padding-right: 1
+		));
+		@include baseline-calc((
+			padding-left: 4,
+			padding-right: 4
+		), medium);
+        transition: background-color 0.25s $glob-anim-fade, color 0.2s $glob-anim-fade, border-color 0.2s $glob-anim-fade;
+		// Border effect
+		&:after {
+			content: '';
+			position: absolute;
+			background-color: transparent;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			height: 0;
+			@include baseline-calc(( height: 0.5 ));
+			transition: background-color 0.2s $glob-anim-fade;
+			@if ($glob-nav-prime-active == flat) {  height: 0;  }
+		}
+		&:hover:after {}
+	}
+
+	// Hide submenus by defuat
+	> ul > li > ul { display: none; }
+}
+
+
+// ==========================================================================
+// Navigation Styles
+// ==========================================================================
+
+@mixin atm_nav-style($style) {
+	@if $style == 'border' or $style == 'border-strong' {
+		> ul > li {
+			border-width: 0 1px 0 0;
+			border-style: solid;
+		}
+	}
+	@if $style == 'transparent' {
+		background-color: transparent !important;
+	}
+	@if $style == 'border-strong' {
+		> ul > li {
+			border-color: #fff;
+		}
+	}
+	@if $style == 'flat' {
+		> ul > li {
+			border-width: 0;
+		}
+	}
+}
+
+
+// ==========================================================================
+// Navigation colours
+// ==========================================================================
+
+@mixin atm_nav-color($color: grey8) {
+	@if $color == trans {
+		
+		> ul > li > a,
+		> ul > li > button {
+			color: get-txt-colour( grey1, 'prime');
+		}
+
+		background-color: transparent;
+		// Link hover states
+		> ul > li > a:hover,
+		> ul > li > button:hover,
+		> ul > li > a:focus,
+		> ul > li > button:focus {
+			color: get-txt-colour( grey1, 'hiLgt');
+			background-color: transparent;
+		}
+		> ul > li > a.active,
+		> ul > li > button.active {
+			background-color: transparent;
+			color: get-txt-colour( grey1, 'hiLgt');
+			&:after { background-color: get-txt-colour( grey1, 'hiLgt');  }
+		}
+	}
+	@else {
+		@include atomic-color((
+			colorName: $color,
+			primeSelector: 'a, button'
+		));
+		// Link hover states
+		> ul > li > a:hover,
+		> ul > li > button:hover,
+		> ul > li > a:focus,
+		> ul > li > button:focus {
+			background-color: darken( map-get( $glob-color, $color), $glob-colorAlpha );
+		}
+
+		// Material border affect
+		@if $atm-navHor-active == border {
+			.current_page_item > a,
+			.current-page-ancestor > a,
+			a.active{
+				background-color: transparent;
+				color: get-txt-colour( $color, 'hiLgt');
+				&:after { background-color: get-txt-colour( $color, 'hiLgt');  }
+			}
+		}
+		@elseif ($atm-navHor-active == block) {
+			.current_page_item > a,
+			.current-page-ancestor > a,
+			a.active{
+				//color: get-txt-colour( $color, 'hiLgt');
+				@include atomic_color(( colorName: accent ));
+				color: get-txt-colour( accent, 'prime');
+			}
+		}
+	}
+}
+
+
+// ==========================================================================
+// Base Styles
+// ==========================================================================
+
+@mixin atm_navHor_base() {
+	position: relative;
+	display: flex;
+	flex-wrap: no-wrap;
+    align-items: stretch;
+    width: 100%;
+	@include grid-row-fullWidth;
+	@include baseline-calc((
+		min-height: $atm-nav-height
+	));
+
+	// Colors
+	// ==========================================================================
+
+	@include atm_nav-color(grey8);
+	&--brand { @include atm_nav-color(brand); }
+	&--dark { @include atm_nav-color(grey2); }
+  
+	// Style modifiers
+	// ==========================================================================
+	@include atm_nav-style($atm-navHor-style);
+	&--border { @include atm_nav-style(border); } // Border style
+	&--flat { @include atm_nav-style(flat); } // Flat style
+	&--transparent { @include atm_nav-style(transparent); } // Flat style
+
+	// Resets
+	// ==========================================================================
+
+	ul,
+	li {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	// Links - common
+	// ==========================================================================
+
+	a { 
+		text-decoration: none; 
+		text-transform: capitalize;
+		text-align: center;
+		margin: 0;
+		&:hover,
+		&:focus { text-decoration: none;  }
+	}
+	// FLoat right links
+	&--right { margin-left: auto!important; }
+}
+
+
+// ==========================================================================
+// Drop Down Links
+// ==========================================================================
+
+@mixin m-dropList() {
+	.#{$atm-dropList-class} {
+		position: absolute;
+		display: block;
+		overflow: hidden;
+		top: 100%;
+		left: 0;
+		height: 0px;
+		width: rem-calc($atm-dropList-width);
+		max-width: 100vw;
+		z-index: 100;
+		opacity: 0;
+		transition: opacity .3s $glob-anim-grow, box-shadow .25s $glob-anim-grow, height .25s $glob-anim-grow;
+
+		// List items
+		// ==========================================================================
+		li {
+			position: relative;
+			display: flex;
+			@include atomic_color((
+				colorName: grey8,
+				primeSelector: 'a, button'
+			));
+        	transition: background-color 0.25s $glob-anim-fade, color 0.2s $glob-anim-fade, border-color 0.2s $glob-anim-fade;
+
+			// States
+			&:hover,
+			&:focus { background-color: darken( map-get( $glob-color, grey8), $glob-colorAlpha ); }
+		
+			&.#{$atm-dropList-class}__parent {
+				@include atomic_color((
+					colorName: grey2,
+					primeSelector: 'a, button'
+				));
+				// States
+				&:hover,
+				&:focus { background-color: $glob-color-grey3; }
+			}
+		}
+
+		// Links
+		// ==========================================================================
+		a {
+			position: relative;
+			display: block;
+			width: 100%;
+			@include baseline-calc(( padding: 2.5 ));
+			text-align: left;
+		}
+	}
+	
+	// Open State
+	// ==========================================================================
+	&.js-open {
+		opacity: 1;
+		box-shadow: $glob-shadow--l1;
+	}
+}
+
+
+// ==========================================================================
+// Build mixin
+// ==========================================================================
+
+@mixin m-navHor() {
+	.m-navHor {
+		@include atm_navHor_base(); // Apply base styles
+		@include atm_navHor_topLevel(); // Apply top level link styles
+	}
+	@include m-dropList(); // Drop Down list
+}
+
+
+
+
+
+
+
+//    <a class="m-navHor__title" href="/styleguide/#/section/5.1/fullscreen">
+//        <img src="/dist/images/demo/placeholder/logo/logo-dark-mob.png">
+//    </a>
+
+
+
+// styleguide:ignore:end

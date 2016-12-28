@@ -1,0 +1,111 @@
+// Logo Group
+//
+// markup:
+// <div class="m-logoGroup">
+//     <h2 class="m-logoGroup__title">Our Partners</h2>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <a class="m-logoGroup__logo"><img src="/dist/images/demo/placeholder/logo/logo-dark.png"></a>
+//     <div class="m-logoGroup__show"><a class="a-button a-button--large a-button--wide js-logoGroup-reveal">Show more</a></div>
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8"><sg-wrapper-content/></div>
+//
+// Styleguide 3.6
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Logo Group Elements
+// ==========================================================================
+
+@mixin m-logoGroup-elements() {
+	&__logo {
+		position: relative;
+		@include flex-grid-column(6 of 12);
+		@include breakpoint( medium ){ @include flex-grid-column(4 of 12); }
+		@include breakpoint( large ){ @include flex-grid-column( 2 of 10 ); }
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		@include baseline-calc((
+			margin-top: 4,
+			margin-bottom: 4
+		));
+		opacity: 1;
+		max-height: 150px;
+		transition: max-height .3s $glob-anim-grow, margin .3s $glob-anim-grow, opacity .2s $glob-anim-fade;
+
+		img { 
+			@include baseline-calc(( 
+				padding-left: 2,
+				padding-right: 2 
+			)); 
+		}
+	}
+	&__show {
+		@include flex-grid-column(12 of 12);
+		text-align: center;
+		@include baseline-calc((
+			margin-top: 4,
+			margin-bottom: 4
+		));
+	}
+	&__title {
+		@include flex-grid-column(12 of 12);
+		@include font-sizes("deca");
+		@include baseline-calc(( padding-bottom: 4 ));
+		text-transform: uppercase;
+		text-align: center;
+	}
+}
+
+// ==========================================================================
+// Reveal 
+// ==========================================================================
+@mixin m-logoGroup-logos() {
+	max-height: 0px!important; 
+	margin-top: 0;
+	margin-bottom: 0;
+	opacity: 0;
+}
+@mixin m-logoGroup-reveal() {
+	&:not(.m-logoGroup--reveal) .m-logoGroup__logo:not(:nth-child(-n+5)) { 
+		@include breakpoint(small down) { @include m-logoGroup-logos(); }
+	}
+	&:not(.m-logoGroup--reveal) .m-logoGroup__logo:not(:nth-child(-n+7)) { 
+		@include breakpoint(medium down) { @include m-logoGroup-logos(); }
+	}
+	&:not(.m-logoGroup--reveal) .m-logoGroup__logo:not(:nth-child(-n+6)) {
+		@include breakpoint(large) { @include m-logoGroup-logos(); }
+	}
+}
+
+// ==========================================================================
+// Logo Group Build
+// ==========================================================================
+
+@mixin m-logoGroup() {
+	.m-logoGroup {
+		position: relative;
+		@include baseline-calc((
+			padding-top: 6,
+			padding-bottom: 6
+		));
+		@include flex-grid-row();
+		@include flex-align($x: center, $y: middle);
+		@include m-logoGroup-elements();
+		@include m-logoGroup-reveal();
+	}
+}
+
+// styleguide:ignore:end

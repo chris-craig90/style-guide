@@ -1,0 +1,120 @@
+// List navigation
+//
+// markup:
+// <nav class="m-navList">
+//     <ul>
+//        <li>
+//            <a class="u-font--prime" href="#">Lorem ipsum</a>
+//             <ul>
+//                <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//                <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//                <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//             </ul>
+//        </li>
+//        <li>
+//            <a class="u-font--prime" href="#">Aliquam tincidunt</a>
+//            <ul>
+//               <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//               <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//               <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//            </ul>
+//        </li>
+//        <li>
+//            <a class="u-font--prime" href="#">Vestibulum</a>
+//            <ul>
+//               <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//               <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//               <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//            </ul>
+//        </li>
+//        <li>
+//            <a class="u-font--prime" href="#">Lorem ipsum</a>
+//             <ul>
+//                <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//                <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//                <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//             </ul>
+//        </li>
+//        <li>
+//            <a class="u-font--prime" href="#">Lorem ipsum</a>
+//             <ul>
+//                <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//                <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//                <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//             </ul>
+//        </li>
+//        <li>
+//            <a class="u-font--prime" href="#">Lorem ipsum</a>
+//             <ul>
+//                <li><a class="u-font--sec" href="#">Lorem ipsum dolor</a></li>
+//                <li><a class="u-font--sec" href="#">Aliquam tincidunt</a></li>
+//                <li><a class="u-font--sec" href="#">Vestibulum auctor</a></li>
+//             </ul>
+//        </li>
+//     </ul>
+// </nav>
+//
+// Styleguide 3.2.3
+
+// styleguide:ignore:start
+
+// List NAvigation
+// ==========================================================================
+
+@mixin m-navList() {
+    .m-navList {
+        position: relative;
+        display: block;
+
+        // Reset styles
+        // --------------------------------------------------------------------------
+
+        ul,
+        li { list-style: none; }
+
+        // Top level list
+
+        // --------------------------------------------------------------------------
+        > ul {
+            @include grid-row();
+        }
+
+        // Top level list items
+        // --------------------------------------------------------------------------
+
+        > ul > li {
+            padding: 0;
+            @include baseline-calc(( 
+                margin-bottom: 2,
+                margin-top: 2 
+            ));
+            @include grid-column(12 of 12);
+            @include grid-column-end;
+            @include breakpoint(medium) { @include grid-column(4 of 12); }
+            @include breakpoint(large) { @include grid-column(2 of 12); }
+            // Overite defualt last column float
+            &:last-child { float: left!important; }
+            > a { 
+                text-transform: uppercase;
+                font-weight: bold;
+                @include baseline-calc(( padding-bottom: 6 ));
+            }
+        }
+
+        // Links general
+        // --------------------------------------------------------------------------
+        
+        a,
+        button {
+            position: realtive;
+            display: block;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+
+            &:hover { text-decoration: underline; }
+        }
+    }
+}
+
+// styleguide:ignore:end

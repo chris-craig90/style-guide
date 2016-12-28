@@ -1,0 +1,152 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// #Utility class's
+// ==========================================================================
+
+@mixin fontUtils() {
+
+  // # Font scale
+  // ==========================================================================
+
+  // Reset common text elements margin
+  h1, h2, h3, h4, h5, h6,
+  p, ul, blockquote, figure{
+    margin-top: 0;
+    position: relative;
+  }
+
+  // Base Font Size
+  // --------------------------------------------------------------------------
+  .u-font--base {
+    @include font-sizes("base");
+  }
+
+  // Larger Font Sizes
+  // --------------------------------------------------------------------------
+  .u-font--exa {
+    @include font-sizes("exa");
+  }
+  .u-font--peta {
+    @include font-sizes("peta");
+  }
+  .u-font--tera {
+    @include font-sizes("tera");
+  }
+  .u-font--giga {
+    @include font-sizes("giga");
+  }
+  .u-font--mega {
+    @include font-sizes("mega");
+  }
+  .u-font--kilo {
+    @include font-sizes("kilo");
+  }
+  .u-font--hecto {
+    @include font-sizes("hecto");
+  }
+  .u-font--deca {
+    @include font-sizes("deca");
+  }
+
+
+  // Small Scale
+  // --------------------------------------------------------------------------
+  .u-font--deci {
+    @include font-sizes("deci");
+  }
+  .u-font--centi {
+    @include font-sizes("centi");
+  }
+
+
+
+  // Vertical Spacings
+  // ==========================================================================
+  // Generates vertical spacing utils for both padding and margins,
+  // Class name follows: u-typ-[margin/padding - top/bottom]--[Basline Multilpier]
+  // Example output: `.u-mb--2`
+  //
+  // For resposnive utils prefix with BEMIT stile `@` flag
+  // Example output: `.u-mb--2@phablet`
+
+
+  // Spacing css properties
+  // --------------------------------------------------------------------------
+
+  // $spacingsUtils map is looped over to generate spacings utils
+  // Map name will be applied to the generated class name
+  // Map value must be css property
+  $spacingsUtils: (
+      mb: 'margin-bottom',
+      mt: 'margin-top',
+      mr: 'margin-right',
+      ml: 'margin-left',
+      pb: 'padding-bottom',
+      pt: 'padding-top',
+      pr: 'padding-right',
+      pl: 'padding-left'
+  );
+
+  // List of breakpoint names
+  // Breakpoints will be attached to class names with `@` flag
+  $breakpoint-list : medium, large, xlarge;
+  $util-class-no : 10;
+
+  // Defualt spacing util classes
+  // Example output: `.u-mb--2`
+  @each $name, $property in $spacingsUtils {
+      @for $i from 1 through $util-class-no {
+          .u-#{$name}--0 {
+              #{$property}: 0!important;
+          }
+          .u-#{$name}--#{$i} {
+          	@include baseline-calc(( #{$property}: $i *2 ));
+          }
+      }
+  }
+
+  @each $breakpoint in $breakpoint-list {
+      $className: '';
+      @each $name, $property in $spacingsUtils {
+          @for $i from 1 through $util-class-no {
+              @include breakpoint($breakpoint) {
+                  .u-#{$name}--0\@#{$breakpoint} {
+                      #{$property}: 0!important;
+                  }
+              }
+              .u-#{$name}--#{$i}\@#{$breakpoint} {
+                  @include baseline-calc(( #{$property}: $i * 2 ), $breakpoint);
+              }
+          }
+      }
+  }
+
+  // Auto Spacing utils
+  .u-mt--auto { margin-top: auto; }
+  .u-mr--auto { margin-right: auto; }
+  .u-ml--auto { margin-left: auto; }
+
+  // # Misc utils
+  // ==========================================================================
+
+  // Text alignment
+  .u-font--center { text-align: center; }
+  .u-font--left   { text-align: left;   }
+  .u-font--right  { text-align: right;  }
+
+  // Text transform
+  .u-font--upper { text-transform: uppercase; }
+  .u-font--light { font-weight: 100; }
+  .u-font--bold { font-weight: bold; }
+
+  // Visibility
+  // ==========================================================================
+  .screen-reader-text { @extend .show-for-sr; }
+
+  // Floats
+  // ==========================================================================
+  .u-float-right { float: right; }
+
+}
+// styleguide:ignore:end

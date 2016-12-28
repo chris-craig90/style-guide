@@ -1,0 +1,215 @@
+// Text atoms
+//
+// Styleguide 2.1
+
+
+// Paragraphs
+//
+// markup:
+// <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium, dolor eu convallis euismod, elit risus ultrices ante, at volutpat lectus dolor et nisl. Donec ligula arcu, pulvinar et malesuada eu, facilisis non odio. Sed commodo massa vel fermentum aliquet. Integer eget mollis erat, eu mollis dui. Nullam molestie odio diam, vitae aliquet lorem euismod sed. Nulla pretium porttitor volutpat. Cras ut neque quam.</p>
+// 
+// Styleguide 2.1.1
+
+// Lists
+//
+// markup:
+// <ul>
+//    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+//    <li>Aliquam tincidunt mauris eu risus.</li>
+//    <li>Vestibulum auctor dapibus neque.</li>
+// </ul>
+//   
+// Styleguide 2.1.2
+
+// Headings
+//
+// markup:
+// <h1>Heading 1</h1>   
+// <h2>Heading 2</h2>   
+// <h3>Heading 3</h3>   
+// <h4>Heading 4</h4>   
+// <h5>Heading 5</h5>   
+// <h6>Heading 6</h6>   
+//
+// Styleguide 2.1.3
+
+// Inline Text Elements
+//
+// markup:
+// <p><a href="#">This is a text link</a></p>
+// <p><strong>Strong is used to indicate strong importance</strong></p>
+// <p><em>This text has added emphasis</em></p>
+// <p>The <b>b element</b> is stylistically different text from normal text, without any special importance</p>
+// <p>The <i>i element</i> is text that is set off from the normal text</p>
+// <p>The <u>u element</u> is text with an unarticulated, though explicitly rendered, non-textual annotation</p>
+// <p><del>This text is deleted</del> and <ins>This text is inserted</ins></p>
+// <p><s>This text has a strikethrough</s></p>
+// <p>Superscript<sup>®</sup></p>
+// <p>Subscript for things like H<sub>2</sub>O</p>
+// <p><small>This small text is small for for fine print, etc.</small></p>
+// <p>Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr></p>
+// <p>Keybord input: <kbd>Cmd</kbd></p>
+// <p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation</q></p>
+// <p><cite>This is a citation</cite>
+// </p><p>The <dfn>dfn element</dfn> indicates a definition.</p>
+// <p>The <mark>mark element</mark> indicates a highlight</p>
+// <p><code>This is what inline code looks like.</code></p>
+// <p><samp>This is sample output from a computer program</samp></p>
+// <p>The <var>variarble element</var>, such as <var>x</var> = <var>y</var></p>
+//
+// Styleguide 2.1.4
+
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Text atomos
+// ==========================================================================
+
+@mixin a-text() {
+	
+	// Paragaraphs
+	// ==========================================================================
+	p { 
+		@include font-sizes("base");
+		@include baseline-calc(( padding-bottom: 4 ));
+	}
+
+	// Unoderired lists
+	// ==========================================================================
+	ul {
+		margin: 0;
+		padding: 0;
+		positon: relative;
+		display: block;
+		list-style-position: outside;
+	}
+	li {
+		@include font-sizes("base");
+		@include baseline-calc((
+			padding-bottom: 1
+		));
+	}
+
+	// Ordered lists
+	// ==========================================================================
+	ol {
+		margin: 0;
+		padding: 0;
+		positon: relative;
+		display: block;
+		list-style-position: outside;
+	}
+	ol > li {
+		@include baseline-calc((
+			padding-bottom: 3
+		));
+	}
+
+	// Link list
+	// ==========================================================================
+	// SPecifically desinged to contain a list of links. Removes defualt list 
+	// style and increases list item spacing
+	.a-list--links{
+		list-style: none;
+
+		> li {
+			@include baseline-calc(( padding-bottom: 2 ));
+		}
+	}
+
+	// Headings
+	// ==========================================================================
+
+	// Heading sizes
+	// --------------------------------------------------------------------------
+	h1 { @include font-sizes("tera"); }
+	h2 { @include font-sizes("giga"); }
+	h3 { @include font-sizes("mega"); }
+	h4 { @include font-sizes("kilo"); }
+	h5 { @include font-sizes("hecto"); }
+	h6 { @include font-sizes("deca"); }
+
+	// Defualt heading styles
+	// --------------------------------------------------------------------------
+	h1, h2, h3, h4, h5, h6 {
+		position: relative;
+		display: block;
+		@include baseline-calc(( padding-bottom: 3 ));
+		font-weight: $glob-font-weight;
+	}
+	
+	// Heading modifiers
+	// --------------------------------------------------------------------------
+
+	// Bold heading 
+	.a-heading--bold {
+		display: table; // Force border to cover text only
+		&:after {
+			content: '';
+			position: relative;
+			display: block;
+			@include baseline-calc(( 
+				margin-top: 0.5,
+				margin-bottom: 0.5,
+				height: 1
+			));
+			background-color: $glob-color-accent;
+		}
+	}
+
+	// Bold top heading 
+	.a-heading--boldTop {
+		display: table; // Force border to cover text only
+		&:before {
+			position: relative;
+			display: block;
+			content: '';
+			@include baseline-calc(( padding-bottom: 1 ));
+			@include baseline-border( "bottom", 6px, 4, $type: "margin" );
+		}
+	}
+
+	// Inline text elements
+	// ==========================================================================
+
+	a,
+	button { 
+		// color: inherit; 
+		// border-color: inherit;
+		transition: color 0.25s $glob-anim-fade;
+		&:hover { text-decoration: underline; }
+	}
+
+	// Horizontal Rules
+	// ==========================================================================
+	
+	// Default <hr>
+	// --------------------------------------------------------------------------
+	hr{
+	    position: relative;
+	    width: 100%;
+	    margin: 0;
+	    @include  baseline-border( "top", 1px, 2, $type: "margin" );
+	    @include baseline-calc(( padding-bottom : 2 ));
+	    border-style: solid;
+	    border-width: 1px 0 0 0;
+	    height: 0;
+	}
+
+	// <hr> style modifiers
+	// --------------------------------------------------------------------------
+	// Short <hr>
+	.a-hr--short{
+	    width: 15%;
+	    margin-right: auto;
+	}
+	// Bold <hr>
+	// --------------------------------------------------------------------------
+	.a-hr--bold{
+	    margin: 0;
+	    @include  baseline-border( "top", 6px, 2, $type: "margin" );
+	    @include baseline-calc(( margin-bottom : 2 ));
+	}
+}
+// styleguide:ignore:end

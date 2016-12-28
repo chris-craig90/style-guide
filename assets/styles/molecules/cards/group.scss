@@ -1,0 +1,86 @@
+// Card gorups
+// 
+// markup:
+// <div class="m-cardGroup">
+//     <div class="m-card m-card--thumbLeft@large large-8">
+//         <div class="m-card__thumb">
+//             <img src="/dist/images/demo/placeholder/banner/mid1.jpg">
+//         </div>
+//         <div class="m-card__text">
+//             <div class="m-card__text__title">
+//                 <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//             </div>
+//             <div class="m-card__text__desc">
+//                 <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//             </div>
+//             <div class="m-card__text__cta">
+//                 <a href="#">Fusce elementum</a>
+//             </div>
+//         </div>
+//     </div>
+//     <div class="m-card large-4">
+//         <div class="m-card__thumb">
+//             <img src="/dist/images/demo/placeholder/banner/mid1.jpg">
+//         </div>
+//     </div>
+//     <div class="m-card m-card--thumbRight@large large-8">
+//         <div class="m-card__thumb">
+//             <img src="/dist/images/demo/placeholder/banner/mid1.jpg">
+//         </div>
+//         <div class="m-card__text">
+//             <div class="m-card__text__title">
+//                 <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//             </div>
+//             <div class="m-card__text__desc">
+//                 <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//             </div>
+//             <div class="m-card__text__cta">
+//                 <a href="#">Fusce elementum</a>
+//             </div>
+//         </div>
+//     </div>
+//     <div class="m-card m-card--mid m-card--brand m-card--bgImg large-4">
+//         <div class="m-card__thumb">
+//             <sg-insert>1.4.2</sg-insert>
+//         </div>
+//         <div class="m-card__text">
+//             <div class="m-card__text__title">
+//                 <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//             </div>
+//             <div class="m-card__text__desc">
+//                 <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//             </div>
+//             <div class="m-card__text__cta">
+//                 <a href="#">Fusce elementum</a>
+//             </div>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8 u-pb--4 u-pt--4"><sg-wrapper-content/></div>
+//
+// Styleguide 3.1.4
+
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Card Groups
+// ==========================================================================
+
+@mixin m-card-group() {
+	.m-cardGroup {
+		@include flex-grid-row();
+		@include baseline-border();
+		@include baseline-border( "both", 1px, 0, "margin" );
+		border-width: 1px 0 1px 1px;
+
+		.m-card__text {
+			border-width: 0 1px 0 0;
+			border-style: solid;
+		}
+	}
+}
+
+// styleguide:ignore:end

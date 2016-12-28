@@ -1,0 +1,84 @@
+// Card Styles
+//
+// .m-card--bgImg - Bg Image
+// .m-card--noThumb - No Thumbnail
+//
+// markup:
+// <div class="m-card m-card--mid {$modifiers}">
+//     <div class="m-card__thumb">
+//         <sg-insert>1.4.2</sg-insert>
+//     </div>
+//     <div class="m-card__text">
+//         <div class="m-card__text__title">
+//             <h3 class="u-font--deca">Suspendisse elementum urna</h3>
+//         </div>
+//         <div class="m-card__text__desc">
+//             <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//         </div>
+//         <div class="m-card__text__cta">
+//             <a href="#">Fusce elementum</a>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <div class="row u-bg--grey6 u-pb--1 u-pt--1">
+//     <div class="medium-7 columns">
+//         <sg-wrapper-content/>
+//     </div>
+// </div>
+//
+// Styleguide 3.1.3
+
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// @mixin m-card-styles
+// ==========================================================================
+// @descrition Generates cusrttom style varients for cards. 
+// Allowing for easy stlyle variantion witht the same html strucutre as a regulart card
+
+@mixin m-card-styles() {
+	.#{$cardClass} {
+		// No thumb
+		&--noThumb { .#{$cardClass}__thumb { display: none; } }
+
+		// Bg Image 
+		&--bgImg { 
+			@include atomic-color(( colorName: 'grey1', buttonColor: true, secondarySelector: '.date', hiLgtSelector: '.category, &:hover .post-title, &:focus .post-title', primeSelector: '.a-hr--bold' ));
+			.#{$cardClass}__thumb { 
+				position: absolute; 
+				height: 100%;
+				border-radius: $m-card-border;
+				overflow: hidden;
+			} 
+			// Thumb image overlay
+			.#{$cardClass}__thumb:after {
+				background:  linear-gradient(to bottom, rgba($glob-color-grey1, 0.3) 0%, rgba($glob-color-grey1, 0.6) 100%);
+			} 
+			// Left Right mods
+			&.#{$cardClass}--thumbLeft {
+				.#{$cardClass}__text {
+					@include breakpoint( large ){
+						margin-left: 40%;
+					}
+				}
+			}
+			&.#{$cardClass}--thumbRight {
+				.#{$cardClass}__text {
+					@include breakpoint( large ){
+						margin-right: 40%;
+					}
+				}
+			}
+		}
+	}
+	.objectfit .#{$cardClass}--bgImg .#{$cardClass}__thumb > img { 
+		object-fit: cover;
+		object-position: center;
+		height: 100%; 
+	}
+}
+
+// styleguide:ignore:end

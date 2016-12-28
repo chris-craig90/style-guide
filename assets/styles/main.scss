@@ -1,16 +1,107 @@
-// Hello Word
-// 
-// Styleguide 1
-
-// styleguide:ignore:start
-
 // ==========================================================================
 // Dependencies
 // ==========================================================================
 // Automatically injected Bower dependencies via wiredep (never manually edit this block)
 
+// styleguide:ignore:start
 // bower:scss
 @import "../../bower_components/foundation-sites/scss/foundation.scss";
 // endbower
-
 // styleguide:ignore:end
+
+
+// ==========================================================================
+// Common
+// ==========================================================================
+// Global styles and settings. Any third part congifuration needed sould be 
+// placed inside this directory or if refrencing a bower dependcy, place `@import` here
+
+// styleguide:ignore:start
+@import "common/_mixins";
+@import "../../bower_components/normalize-css/normalize";
+@import "common/_variables";
+@import "common/_foundation";
+@import "common/_global";
+//@import "common/_utils";
+// styleguide:ignore:end
+
+
+// Themes
+// ==========================================================================
+//@import "themes/peek";
+@import "themes/default";
+
+
+// ==========================================================================
+// Design fundamentals
+// ==========================================================================
+@import "design/main";
+
+
+// ==========================================================================
+// Atoms
+// ==========================================================================
+@import "atoms/main";
+
+
+// ==========================================================================
+// Molecules
+// ==========================================================================
+@import "molecules/main";
+
+
+// ==========================================================================
+// Organisms
+// ==========================================================================
+@import "organisms/main";
+
+
+// Templates 
+// ==========================================================================
+@import "templates/main";
+
+
+// Themes elements
+// ==========================================================================
+@import "themes/theme-els/footer-elements";
+@import "themes/theme-els/child-pages";
+
+
+// ==========================================================================
+// SC5 Styles
+// ==========================================================================
+@import "common/_styleguideElements";
+@import "sc5/main";
+
+
+// ==========================================================================
+// Component list
+// ==========================================================================
+// Uncommnet any compoinent you wish to use
+
+// Utilities
+@include gridUtils();               // Grid utilities
+@include pageStrucutre();           // Page structure
+@include fontUtils();               // Font utilities
+@include styleGuideElements();      // Style guide elements !! Do not inlcude in production
+
+// Components
+@include a-text();
+@include a-button();
+@include a-buttonGroup();
+@include a-chip();
+
+@include o-sideNav();
+@include o-splash();
+@include o-footer();
+
+@include m-navHor();
+@include m-navAccord();
+@include m-navList();
+@include m-navBread();
+@include m-navPagination();
+@include m-card();
+@include m-card-group();
+@include m-logoGroup();
+@include m-forms();
+

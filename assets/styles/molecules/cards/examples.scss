@@ -1,0 +1,86 @@
+// styleguide:ignore:start
+
+
+// Card Examples
+//
+
+
+// @mixin m-card_misc-els
+// ==========================================================================
+// @description Custom style for specific elements that relate to the exapmles below.
+// i.e if you wanted to target a title in a card if you are using it to display a product, place that style inisde this mixin
+
+@mixin m-card_misc-els() {
+	// a.#{$cardClass}:hover {
+	// 	h1,
+	// 	.post-title { transition : color .2s $glob-anim-fade; }
+	// }
+}
+
+// Post: Basic
+//
+// .m-card - Basic
+// .m-card.m-card--bgImg - Bg Image
+// .m-card.m-card--noThumb - No Thumbnail
+//
+// markup:
+// <a class="{$modifiers}" href="#">
+//     <div class="m-card__thumb">
+//         <sg-insert>1.4.2</sg-insert>
+//     </div>
+//     <div class="m-card__text">
+//         <div class="m-card__text__title">
+//             <p class="u-font--deci u-pb--1 u-font--bold category">SCIENCE</p>
+//             <h3 class="u-font--hecto post-title">Suspendisse elementum urna</h3>
+//         </div>
+//         <div class="m-card__text__desc">
+//             <p>Curabitur tellus dolor, tincidunt sed ante eget, porttitor vestibulum lorem. Donec lorem arcu, lobortis tristique nibh in</p>
+//         </div>
+//         <div class="m-card__text__cta">
+//             <sg-insert>3.5</sg-insert><span class="u-float-right u-font--deci date">23 August, 2016</span>
+//         </div>
+//     </div>
+// </a>
+//
+// sg-wrapper:
+// <div class="u-bg--grey6 u-pad--2" style="max-width: 430px;">
+//     <sg-wrapper-content/>
+// </div>
+//
+//
+
+
+// Post: Large
+//
+// .m-card--thumbLeft - Thumb left
+// .m-card--bgImg.m-card--thumbLeft - Bg Image
+// .m-card--bgImg - Bg Image
+// .m-card--noThumb - No Thumbnail
+//
+// markup:
+// <div class="m-card m-card--large m-card--padMid {$modifiers}" href="#">
+//     <div class="m-card__thumb">
+//         <sg-insert>1.4.1</sg-insert>
+//     </div>
+//     <div class="m-card__text">
+//         <div class="m-card__text__title">
+//             <p class="u-pb--5 u-font--bold"><sg-insert>3.5</sg-insert><span class="u-float-right u-font--deci date">23 August, 2016</span></p>
+//             <h3 class="u-font--mega post-title">Curabitur dapibus quis</h3>
+//             <hr class="u-pb--1 a-hr--short a-hr--bold">
+//         </div>
+//         <div class="m-card__text__desc">
+//             <p>Donec scelerisque est at purus laoreet, sit amet ornare erat commodo. Vestibulum nibh justo, malesuada id dui in, tincidunt dapibus quam. Donec congue nisl vel purus pellentesque, at sollicitudin justo ultrices. Aenean malesuada mi augue, quis rhoncus augue congue sed.</p>
+//             <p><a class="a-button a-button--secondary" href="#">Read more</a></p>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey6 u-pad--2" style="max-width: 1100px;">
+//     <sg-wrapper-content/>
+// </div>
+//
+//
+
+// styleguide:ignore:end
+

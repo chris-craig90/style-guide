@@ -1,0 +1,295 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// Toolkit
+// ==========================================================================
+
+// Get Text Color
+// ==========================================================================
+@function get-txt-colour( $colorName, $txt-type ){
+  $bgColor  : map-get($glob-color, $colorName);
+  $txt-color : ''; // THis will be retunred at end of funciton
+  	
+  // Determine if BG colour is light or dark
+  //@if (lightness($bgColor) > 50) {
+ 	@if ( contrast_ratio( $bgColor, rgba(255,255,255,1) ) >= $glob-color-aspect-ratio ) {
+    @if $txt-type == 'prime'    {      $txt-color : rgba(255,255,255,1); }
+    @else if $txt-type == 'secondary'{ $txt-color : rgba(255,255,255,0.70); }
+    @else if $txt-type == 'disabled' { $txt-color : rgba(255,255,255,0.50); }
+    @else if $txt-type == 'icons'    { $txt-color : rgba(255,255,255,0.50); }
+    @else if $txt-type == 'dividers' { $txt-color : rgba(255,255,255,0.12); }
+	}
+	@else {
+    @if ($txt-type == 'prime')         { $txt-color : rgba(0,0,0,0.87); }
+    @elseif  ($txt-type == 'secondary'){ $txt-color : rgba(0,0,0,0.54); }
+    @elseif ($txt-type == 'disabled')  { $txt-color : rgba(0,0,0,0.38); }
+    @elseif ($txt-type == 'icons')     { $txt-color : rgba(0,0,0,0.38); }
+    @elseif ($txt-type == 'dividers')  { $txt-color : rgba(0,0,0,0.12); }
+  }
+
+	// Highlight color 
+  @if ($txt-type == 'hiLgt')  { 
+		$txt-color : map-get($glob-color-hiLgt, $colorName); 
+	}
+
+  // Button color
+  @if ($txt-type == 'button')  { 
+    $txt-color : map-get($glob-color-buttons, $colorName); 
+  }
+
+  // Button color
+  @if ($txt-type == 'button-secondary')  {
+    $txt-color : map-get($glob-color-buttons-secondary, $colorName); 
+  }
+
+  @return $txt-color;
+}
+
+// Contrast ratio
+// --------------------------------------------------------------------------
+
+@function pow($number, $exponent) {
+  $value: 1;
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+  @return $value;
+}
+
+@function color_luminance($color) {
+  // Adapted from: https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js
+  // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+  $rgba: red($color), green($color), blue($color);
+  $rgba2: ();
+ 
+  @for $i from 1 through 3 {
+    $rgb: nth($rgba, $i);
+    $rgb: $rgb / 255;
+ 
+    $rgb: if($rgb < .03928, $rgb / 12.92, pow(($rgb + .055) / 1.055, 2.4));
+ 
+    $rgba2: append($rgba2, $rgb);
+  }
+ 
+  @return .2126 * nth($rgba2, 1) + .7152 * nth($rgba2, 2) + 0.0722 * nth($rgba2, 3);
+}
+
+@function contrast_ratio($color1, $color2) {
+  // Adapted from: https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js
+  // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+  $luminance1: color_luminance($color1) + .05;
+  $luminance2: color_luminance($color2) + .05;
+  $ratio: $luminance1 / $luminance2;
+ 
+  @if $luminance2 > $luminance1 {
+    $ratio: 1 / $ratio;
+  }
+ 
+  $ratio: round($ratio * 10) / 10;
+ 
+  @return $ratio;
+}
+
+
+// Buttons
+// --------------------------------------------------------------------------
+@mixin atm_buttonColor( $colorName, $buttonType: 'button' ) {
+    $button-color-sec: get-txt-colour($colorName, $buttonType);
+    $button-color-name: grey8;
+    // Loop color map to find the name of the button color,
+    // We will use this to apply the correct text color to the button
+    @each $name, $value in $glob-color {
+      @if ( $value == $button-color-sec ) { 
+        $button-color-name: $name;
+      }
+    }
+    background: $button-color-sec;
+    color: get-txt-colour($button-color-name, 'prime');
+    border-color: get-txt-colour($button-color-name, 'dividers');
+
+    // Hover effects
+    &:after { border-color: $button-color-sec; }
+        
+    &:hover,
+    &.pseudo-class-hover,
+    &:focus,
+    &.pseudo-class-focus {
+	    @if ( lightness(get-txt-colour($colorName, $buttonType)) > 50 ){
+	     	background-color: scale-color( get-txt-colour($colorName, $buttonType), $lightness: 30%);
+	    }@else{
+	    	background-color: scale-color( get-txt-colour($colorName, $buttonType), $lightness: -30%);
+	    }
+    	@if $button-color-sec == #fff {
+	        background-color: $glob-color-grey4;
+	    }
+	    @if $button-color-sec == #000 {
+	        background-color: $glob-color-grey3;
+	    }
+    }
+}
+
+// Atomic color
+// ==========================================================================
+// Adds a dropdown arrow to a button.
+// @param {string} $colorName - Color name
+// @param {string} $backgroundColor - Apply background colors
+// @param {string} $textColor - Apply text colors
+// @param {string} $transBG - Transparent Background
+// @param {string} $transBG - Transparent Background aplpha
+@mixin atomic_color( $settingsMap ) {
+    
+    // Settings
+    $defualtSettings: (
+      colorName: brand,
+      backgroundColor : true,
+      textColor : true,
+      iconColor: true,
+      buttonColor: false,
+      utils: false,
+      primeSelector: '',
+      secondarySelector: '',
+      hiLgtSelector: '',
+      transBG: false, 
+      alpha: 0.7,
+      logo: false,
+    );
+    // Merge custom and defuakt settings map
+    $settings: map-merge($defualtSettings, $settingsMap);
+
+    // Variables
+    // --------------------------------------------------------------------------
+    $colorName: map-get($settings, colorName);
+    $color: map-get( $glob-color, $colorName ); // Fet color via $colorName param
+    
+    // Settings checklist
+    $backgroundColor: map-get($settings, backgroundColor);
+    $transBG: map-get($settings, backgroundColor);
+    $alpha: map-get($settings, alpha);
+    $textColor: map-get($settings, textColor);
+    $iconColor: map-get($settings, iconColor);
+    $buttonColor: map-get($settings, buttonColor);
+    $utils: map-get( $settings, utils );
+    
+    // CSS selectors
+    $primeSelector: map-get($settings, primeSelector);
+    $secondarySelector: map-get($settings, secondarySelector);
+    $hiLgtSelector: map-get($settings, hiLgtSelector);
+    $accentSelector: map-get($settings, accentSelector);
+
+    // Defualt color values - Set background color and font soolor properties
+    // --------------------------------------------------------------------------
+    @if ( $backgroundColor && $transBG == true ) { background-color: rgba($color, 0); }
+    @if ( $backgroundColor == true ) { background-color: $color; }
+
+    // Text and border color
+    // --------------------------------------------------------------------------
+    @if ( $textColor == true ) {
+      color: get-txt-colour($colorName, 'prime');
+      border-color: get-txt-colour($colorName, 'dividers');
+      a { color: get-txt-colour($colorName, 'hiLgt'); }
+    }
+
+    // Text and border color
+    // --------------------------------------------------------------------------
+    @if ( $iconColor == true ) {
+      [class*="a-icon"] { color: get-txt-colour($colorName, 'icons'); }
+    }
+
+    // Prime colors
+    // --------------------------------------------------------------------------
+    @if ( $primeSelector != '' ) {
+      #{$primeSelector} { color: get-txt-colour($colorName, 'prime'); border-color: initial; }
+    }
+    
+    // Secondary colors
+    // --------------------------------------------------------------------------
+    @if ( $secondarySelector != '' ) {
+      #{$secondarySelector} { color:get-txt-colour($colorName, 'secondary'); }
+    }
+
+    // Highlight colors
+    // --------------------------------------------------------------------------
+    @if ( $hiLgtSelector != '' ) {
+      #{$hiLgtSelector} { color:get-txt-colour($colorName, 'hiLgt'); }
+    }
+
+    // Accent colors
+    // --------------------------------------------------------------------------
+    @if ( $accentSelector != '' ) {
+      #{$accentSelector} { color: map-get($glob-color, 'accent'); }
+    }
+
+    @if ( $buttonColor == true ) {
+      
+      .nf-form-cont [type="button"],
+      .a-button { @include atm_buttonColor( $colorName, 'button' ); }
+      // .a-button--secondary { @include atm_buttonColor( $colorName, 'button-secondary' ); }
+
+      .a-button--hollow {
+        background-color: transparent;
+        border-color: get-txt-colour($colorName, 'prime');
+        color: get-txt-colour($colorName, 'prime');
+        // Hover effects
+        &:after { border-color: get-txt-colour($colorName, 'prime'); }
+
+        &:hover,
+        &.pseudo-class-hover,
+        &:focus,
+        &.pseudo-class-focus { 
+          @if ( lightness(get-txt-colour($colorName, 'prime')) > 50 ){
+            background-color: rgba(255,255,255,1);
+            color: rgba(0,0,0,0.87);
+          }@else{
+            background-color: rgba(0,0,0,0.87);
+            color: rgba(255,255,255,1);
+          }
+        }
+      }
+
+    }
+
+    // Color utils
+    // --------------------------------------------------------------------------
+    @if ( $utils ) {
+      &.u-font--sec,
+      .u-font--sec { color:get-txt-colour($colorName, 'secondary'); }
+      
+      &.u-font--hilgt, 
+      .u-font--hilgt { color: get-txt-colour($colorName, 'hiLgt'); }
+      
+      &.u-font--disabled,
+      .u-font--disabled,
+      .pseudo-class-disabled,
+      *[disabled] { opacity: 0.5; }
+      
+      .u-font--accent { color: get-txt-colour($colorName, 'hiLgt'); }
+
+      &.u-font--prime,
+      .u-font--prime { color:get-txt-colour($colorName, 'prime'); }
+
+      // Border colors
+      .u-border--accent { border-color: get-txt-colour($colorName, 'hiLgt'); }
+    }
+
+
+    // Logo color
+    // --------------------------------------------------------------------------
+    @if ( map-get($settings, logo) == true) {
+      @if ( lightness($color) > 70 ) { 
+        .atm-logo__dark { display: block; }
+        .atm-logo__light { display: none; }
+      }
+      @else { 
+        .atm-logo__dark { display: none; }
+        .atm-logo__light { display: block; }
+      }
+    }
+    
+
+}
+
+
+
+// styleguide:ignore:end

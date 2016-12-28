@@ -1,0 +1,549 @@
+// styleguide:ignore:start
+
+// Utility Functions
+//
+// #### `baseline-val($brk-point)`;
+// Returns single Baseline value for specified breakpoint
+// ##### Paramaters
+// - $brk-point - Breakpoint value . i.e Defualt, Phone etc.
+//
+// example: baseline-val('phone');
+
+// Get Line height
+// --------------------
+@function line-height($scale, $brk-point) {
+  $baseline : map-get($type-scale, baseline);
+  @return (map-get($baseline, $brk-point)*0.5) *$scale;
+}
+
+// Get Baseline Val
+// --------------------
+@function baseline-val($brk-point) {
+  $baseline : map-get($type-scale, baseline);
+  @return (map-get($baseline, $brk-point)*0.5);
+}
+
+
+// Mixins
+//
+// ---
+// #### `baseline-calc( $propMap )`;
+// Returns css properties inside each breakpoint, each prop value pased is multiplied by baseline size
+// ##### Paramaters
+// - $propMap - Map of CSS propertiys
+//
+// example:
+// `@include baseline-calc((
+//   height      : 2.5,
+//   line-height : 2.5,
+//   max-width   : 8,
+// ));`
+//
+// ---
+// #### `basline-rest( $settings-list )`;
+// Adds top padding and margin bottom so text sits directly ontop of baseline
+// ##### Paramaters
+// - $settings-list  - Nestted collection of lists.
+// -- List Val 1 = Line height,
+// -- List Val 1 = Padding top,
+//
+// example:
+// @include basline-rest((
+//   (2, 5px), (3, 7px), (3, 9px), (5, 4px), (6, 3px)
+// ));
+//
+//
+// ---
+// #### `font-sizes( $scale-key )`;
+// Returnns the repsonive font-sizes for the specified $scale-key
+// ##### Paramaters
+// - $scale-key  - Scale Key name
+//
+// example:
+// @include font-sizes("base");
+
+
+// Baseline-calc
+// Helps calcultate the baseline val for multiple css properties.
+// Will return the media querries for each respposve basleine value meaning you dont have to type out multuple media querries.
+// --------------------
+
+@mixin baseline-calc( $propMap, $breakPnt: 'all', $border: '0px' ){
+  $baseline-size : map-deep-get($type-scale, baseline, default) * 0.5;
+  $cssVals : $propMap;
+
+  @if $breakPnt == 'all' {
+      @each $property, $value in $cssVals {
+        // If border offset needed, use css clac()
+        @if ( $border != '0px' ){ #{$property}: calc( #{$baseline-size * $value} - #{$border}); }
+        @else {  #{$property}: #{$baseline-size * $value}; }
+      }
+  }
+  @else {
+      @include breakpoint( #{$breakPnt} ) {
+          @each $property, $value in $cssVals {
+              // If border offset needed, use css clac()
+              @if ( $border != '0px' ){ #{$property}: calc( #{$baseline-size * $value} - #{$border}); }
+              @else {  #{$property}: #{$baseline-size * $value}; }
+          }
+      }
+  }
+}
+
+
+// Baseline Border
+@mixin baseline-border( $position: "bottom", $borderSize: 1px, $baselineOffset: 0, $type: "margin" ){
+  border-style: solid;
+  // Top border
+  @if $position == "top" {
+    border-width: #{$borderSize} 0 0 0;
+    @include baseline-calc((
+      #{$type + "-bottom"}: $baselineOffset
+    ), 'all', $borderSize);
+  }
+  @elseif $position == "bottom" {
+    border-width: 0 0 #{$borderSize} 0;
+    @include baseline-calc((
+      #{$type + "-" + $position}: $baselineOffset
+    ), 'all', $borderSize);
+  }
+  @elseif $position == "both" {
+    border-width: #{$borderSize} 0 #{$borderSize} 0;
+    @include baseline-calc((
+      #{$type + "-bottom"}: $baselineOffset
+    ), 'all', $borderSize);
+  }
+}
+
+
+// Baseline Rest
+// Forces text to sit on baseline by adding padding-top and adds margin bottom so procedding elemtns are not ditrubed
+// --------------------
+@mixin basline-rest( $settings-list ) {
+  $breakpoints : map-get($type-scale, breakpoints);
+  $rest-settings : $settings-list;
+  $breakpoints-map : map-get($type-scale, breakpoints);
+  $breakpoints-list : ();
+  $breakpoints-names : ();
+  $baseline-btm : 0.5;
+  $baseline-sizes : map-get($type-scale, baseline);
+
+  @each $value, $break-point in $breakpoints {
+    $breakpoints-list: append($breakpoints-list, $break-point, 'comma');
+    $breakpoints-names: append($breakpoints-names, $value, 'comma');
+  }
+
+  $settings-counter: 0;
+  @each $reset in $rest-settings {
+
+
+    $reset : $reset;
+    $baseline : map-get($baseline-sizes, default);
+
+    $offset: nth($reset, 2);
+    $line-height: ($baseline *0.5) * nth($reset, 1);
+    $margin-bottom : 0px;
+
+    @if length( $reset ) == 3{
+        $margin-bottom : nth($reset, 3) * ($baseline *0.5);
+    }
+
+    @if $settings-counter == 0 {
+      line-height : $line-height;
+      padding-top: #{$offset};
+      margin-bottom: calc( #{$margin-bottom} - #{$offset} );
+    }
+    @else{
+      $brk-pnt : nth($breakpoints-list, $settings-counter);
+      $brk-pnt-name : nth($breakpoints-names, $settings-counter);
+
+      $baseline : map-get($baseline-sizes, $brk-pnt-name);
+      $line-height: ($baseline *0.5) * nth($reset, 1);
+
+      @include breakpoint( #{$brk-pnt-name} ) {
+        //font-size: $font-size;
+        line-height : $line-height;
+        padding-top: #{$offset};
+        //@debug $brk-pnt-name;
+        margin-bottom: calc( #{$margin-bottom} - #{$offset} );
+      }
+    }
+    $settings-counter : $settings-counter+1;
+  }
+
+}
+
+// Font Sizes
+// Returnns the repsonive font-sizes for the specified $scale-key
+// --------------------
+@mixin font-sizes( $scale-key, $resetBaseline: 1 ) {
+  $breakpoints : map-get($type-scale, breakpoints);
+  $baselineRestMap : map-deep-get($type-scale, baseline-resets, $scale-key);
+
+  font-size : map-deep-get($type-scale, $scale-key, default);
+  @each $break-name, $break-point in $breakpoints {
+    @include breakpoint( #{$break-name} ) {
+      font-size: map-deep-get($type-scale, $scale-key, $break-name);
+    }
+  }
+
+  // Baseline rest
+  @if ( $resetBaseline ) {
+    @include basline-rest($baselineRestMap);
+  }
+}
+
+
+@mixin sg-font-token-names( $scale-key ){
+  $breakpoints : map-get($type-scale, breakpoints);
+  $font-size : map-deep-get($type-scale, $scale-key, default);
+  content: "Default: \00a0" + $font-size;
+  @each $break-name, $break-point in $breakpoints {
+    $font-size : map-deep-get($type-scale, $scale-key, $break-name);
+    @include breakpoint( #{$break-name} ) {
+      content: $scale-key +  ":\00a0" + $font-size;
+    }
+  }
+}
+
+
+
+// Main Scale Function
+//
+// Functoin Execution Steps:
+// 1. Store settings values
+// 2. Create GLOBAL $type-scale map, we will add to this as the funtion progresses
+// 3. Build Breakpoints Map
+// 4. Build Baseline refrence map
+// 5. Build Type Scale Maps using create-scale-maps()
+
+
+// `create-scale-maps($scaleSize)`
+// Creates the resposive scale maps and returns map of maps.
+// Base map needs to attached to GLOBAL $type-scale befre excucting this function
+//
+// params:
+// $scaleSize - bool (true/false) : Detemines whther the scale should scale up or scale down fro smaller font sizes
+
+@function create-scale-maps($settings, $type-scale-map, $scaleSize) {
+  // Step 1 : Store Settings Values
+  // ------------------------------------------
+  $settings-map:          $settings;
+  $scale-keys: ();
+  @if $scaleSize == true { $scale-keys : map-get($settings-map, scale-keys); }
+  @else { $scale-keys : map-get($settings-map, neg-scale-keys); }
+  $font-sizes:        map-get($settings-map, font-sizes);
+  $font-scales:       map-get($settings-map, scales);
+  $baseline-sizes:    map-get($settings-map, baseline-size);
+  $brk-pnts:          map-get($settings-map, brk-pnts);
+
+  $break-point-names: (); // Map Will contain a list of each break point name.
+  // Build $break-point-names list
+  @each $value, $break-point in $brk-pnts {
+    $new-brk-name : join($break-point-names, $value, comma);
+    $break-point-names : $new-brk-name;
+  }
+
+  // Clone of the GLOBAL $type-scale-map from build-type-scale.
+  // This will be retruned at end of func.
+  // This must allready contain the brekpoint and basline maps before being called
+  $type-scale : $type-scale-map;
+  // Loop through font keys
+
+  @each $key in $scale-keys {
+    $current-key-index: index($scale-keys, $key);
+    $font-size-map : ();
+
+    // Set Default Font Sizes
+    @if $scaleSize == true {
+      @if $current-key-index == 1{
+        $font-size-map : (
+          default : nth($font-sizes, 1)
+        );
+      }
+      @else{
+        $last-key: nth($scale-keys, $current-key-index - 1 );
+        $last-font: map-deep-get($type-scale, $last-key, default);
+        $font-size-map : (
+          default : $last-font * nth($font-scales, 1)
+        );
+      }
+    }
+    @else {
+      @if $current-key-index == 1{
+        $font-size-map : (
+          default : nth($font-sizes, 1) / nth($font-scales, 1)
+        );
+      }
+      @else{
+        $last-key: nth($scale-keys, $current-key-index - 1 );
+        $last-font: map-deep-get($type-scale, $last-key, default);
+        $font-size-map : (
+          default : $last-font / nth($font-scales, 1)
+        );
+      }
+    }
+
+    // Set Breakpoint Font Sizes
+    // Loopthough each breakpoint and generate font scale sizes for current key.
+    @each $break-point in $break-point-names {
+      $break-pointkey: index($break-point-names, $break-point)+1;
+      $current-font-scale: index($font-scales, $break-pointkey);
+
+      // Generate Positive Font Scale Maps
+      // ====================================
+      @if $scaleSize == true {
+        // If first Key name, asign base font size
+        @if $current-key-index == 1{
+          $new-font-size : (
+            $break-point : nth($font-sizes, $break-pointkey)
+          );
+          // Merge our new scale with main scale map.
+          $font-size-map : map-merge( $font-size-map, $new-font-size );
+        }
+        // Else use the font scale to generate font size.
+        @else {
+          $last-key: nth($scale-keys, $current-key-index - 1 );
+
+          $last-font: map-deep-get($type-scale, $last-key, $break-point);
+          $scale-val: nth($font-scales,$break-pointkey);
+
+          // If $scaleSize === true, scale up. Else, generate small font scale maps
+          $new-font-size : ();
+          @if $scaleSize {
+            $new-font-size : ( $break-point : $last-font * $scale-val, );
+          }
+          @else{
+            $new-font-size : ( $break-point : $last-font / $scale-val, );
+          }
+          // Merge our new scale with main scale map.
+          $font-size-map : map-merge( $font-size-map, $new-font-size );
+        }
+      }
+      // Generate Negative Font Scale Maps
+      // ====================================
+      @else {
+        // If first Key name, devide by base font size
+        @if $current-key-index == 1{
+          $scale-val: nth($font-scales,$break-pointkey);
+          $new-font-size : (
+            $break-point : nth($font-sizes, $break-pointkey) / $scale-val
+          );
+          // Merge our new scale with main scale map.
+          $font-size-map :  map-merge( $font-size-map, $new-font-size );
+        }
+        // Else use the font scale to generate font size.
+        @else {
+          $last-key: nth($scale-keys, $current-key-index - 1 );
+
+          //@debug $last-key;
+          $last-font: map-deep-get($type-scale, $last-key, $break-point);
+          $scale-val: nth($font-scales,$break-pointkey);
+          $new-font-size : (
+              $break-point : $last-font / $scale-val,
+          );
+          // Merge our new scale with main scale map.
+          $font-size-map :  map-merge( $font-size-map, $new-font-size );
+        }
+      }
+    }
+    // Merge the new font-key map with main type-scale
+    $type-scale: map-merge( $type-scale, ( $key :  $font-size-map ) );
+  }
+
+  @return $type-scale;
+}
+
+@function build-type-scale($settings) {
+
+  // ### Step 1 : Store Settings Values
+  // ------------------------------------------
+  $settings-map:          $settings;
+  $scale-keys:        map-get($settings-map, scale-keys);
+  $neg-scale-keys:    map-get($settings-map, neg-scale-keys);
+  $font-sizes:        map-get($settings-map, font-sizes);
+  $font-scales:       map-get($settings-map, scales);
+  $baseline-sizes:    map-get($settings-map, baseline-size);
+  $brk-pnts:          map-get($settings-map, brk-pnts);
+  $baseline-resets:   map-get($settings-map, baseline-resets);
+  $break-point-names: (); // Map Will contain a list of each break point name.
+
+
+  // ### Step 2 : GLOBAL $type-scale Map,
+  // Properties will get added to this map as the scale is built.
+  // This Will get Returned at the end of the function.
+  // ------------------------------------------
+
+  // $type-scale : ()!global; // Main Type Scale Map. SC5 Cnfilct with this line
+  $type-scale : (); // Main Type Scale Map
+
+
+  // ### Step 3 : Breakpoints Setup.
+  // 1. Build $break-point-names list,
+  // 2. Merge $brk-pnts into GLOBAL $type-scale
+  // ------------------------------------------
+
+  // Build $break-point-names list
+  @each $value, $break-point in $brk-pnts {
+    $new-brk-name : join($break-point-names, $value, comma);
+    $break-point-names : $new-brk-name;
+  }
+  // Merge $brk-pnts with GLOBAL $type-scale
+  $type-scale: map-merge( $type-scale, ( breakpoints: $brk-pnts ) );
+
+
+  // ### Step 4 : Build Baseline refrence map and merge into GLOBAL $type-scale
+  // Map Key = Breakpoit Name,
+  // MAp Val = Basline Size for that breakpoint
+  // ------------------------------------------
+
+  // Temporary basline map,
+  // we will merge this GLOBAL $type-scale when map has been built
+  // Populat with defautlt basline line size beofre add breakpoint baselines
+  $temp-basleine-map:(
+    default: nth($baseline-sizes, 1)
+  );
+
+  // Loop through Baseline sizes
+  @each $break-point in $break-point-names{
+    $current-baseline-index: index($break-point-names, $break-point) + 1; // Add 1 so we miss the deyalts size which was just set
+    $current-baseline : nth($baseline-sizes, $current-baseline-index );
+
+    $new-bl : (
+      $break-point : $current-baseline
+    );
+    $temp-basleine-map: map-merge( $temp-basleine-map, $new-bl );
+  }
+  // Merge $temp-basleine-map with GLOBAL $type-scale
+  $type-scale: map-merge( $type-scale, ( baseline: $temp-basleine-map ) );
+
+
+  // ### Step 5 : Build Type Scale Maps
+  // Positve Font Scle Maps
+  // ------------------------------------------
+  $type-scale : create-scale-maps($settings, $type-scale, true);
+  // Generate Small Font Sizes
+  $type-scale : create-scale-maps($settings, $type-scale , false);
+
+
+  // ### Step 6 : BAseline reset maps
+  // ------------------------------------------
+  $type-scale: map-merge( $type-scale, ( baseline-resets: $baseline-resets ) );
+
+  @return $type-scale;
+}
+
+
+// 4. Grid Overlay
+//
+// Provides a absoloutley postioned baseline grid overlay. This element should be auto generated using the baselineGrid.js mthods.
+// The grid overlay is optional, you may want to only include it in a dev build.
+//
+// #### `@include show-baseline()`;
+
+@mixin show-baseline(){
+  $breakpoints : map-get($type-scale, breakpoints);
+  $baseline : map-get($type-scale, baseline);
+  .js-baseLineOverlay {
+    content: '';
+    position: absolute;
+    width: auto;
+    height: 100%;
+    z-index: 9999;
+    content: '';
+    display: none;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom, hsla(200, 100%, 50%, .3) 1px, transparent 1px);
+    background-position: left -1px;
+    background-repeat: repeat;
+
+    $baseline-val : map-get($baseline, default);
+    background-size: $baseline-val*0.5 $baseline-val*0.5;
+
+    @each $break-name, $break-point in $breakpoints {
+      $baseline-val : map-get($baseline, $break-name);
+      @include breakpoint( #{$break-name} ) {
+        background-size: $baseline-val*0.5 $baseline-val*0.5;
+      }
+    }
+
+  }
+  .js-baseLineOverlay{display: none;}
+  .js-baseLineOverlay--show{
+    display: block;
+  }
+}
+
+
+// 5. Sass Extensions
+//
+// #### `map-deep-get()` & `map-deep-set()`
+// Exted the native Sass functions an allows us to easly get deep, nester map values.
+
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+/// Deep set function to set a value in nested maps
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {List} $keys -  Key chaine
+/// @param {*} $value - Value to assign
+/// @return {Map}
+@function map-deep-set($map, $keys, $value) {
+  $maps: ($map,);
+  $result: null;
+
+  // If the last key is a map already
+  // Warn the user we will be overriding it with $value
+  @if type-of(nth($keys, -1)) == "map" {
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+  }
+
+  // If $keys is a single key
+  // Just merge and return
+  @if length($keys) == 1 {
+    @return map-merge($map, ($keys: $value));
+  }
+
+  // Loop from the first to the second to last key from $keys
+  // Store the associated map to this key in the $maps list
+  // If the key doesn't exist, throw an error
+  @for $i from 1 through length($keys) - 1 {
+    $current-key: nth($keys, $i);
+    $current-map: nth($maps, -1);
+    $current-get: map-get($current-map, $current-key);
+    @if $current-get == null {
+      @error "Key `#{$key}` doesn't exist at current level in map.";
+    }
+    $maps: append($maps, $current-get);
+  }
+
+  // Loop from the last map to the first one
+  // Merge it with the previous one
+  @for $i from length($maps) through 1 {
+    $current-map: nth($maps, $i);
+    $current-key: nth($keys, $i);
+    $current-val: if($i == length($maps), $value, $result);
+    $result: map-merge($current-map, ($current-key: $current-val));
+  }
+
+  // Return result
+  @return $result;
+}
+
+// styleguide:ignore:end

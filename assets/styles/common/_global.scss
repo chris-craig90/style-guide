@@ -1,0 +1,51 @@
+// ==========================================================================
+// GLobal styles
+// ==========================================================================
+// 
+// 1. Box sizing
+// 2. Images
+// 3. Borders
+
+
+// 1. Box sizing
+// ==========================================================================
+// Apply a natural box layout model to all elements, but allowing components to change 
+// Source: https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+// Required for parrlax
+html,
+body { overflow: initial; }
+
+
+// 2. Images
+// ==========================================================================
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+iframe { max-width: 100%; }
+
+
+// 3. Borders
+// ==========================================================================
+
+// Inherit border color from parent
+* { border-color: inherit; }
+
+
+// Resets
+// ==========================================================================
+
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+}

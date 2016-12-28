@@ -1,0 +1,90 @@
+// Footers
+//
+// .o-footer - Dark footer (defualt)
+// .o-footer--light - Light Footer
+// 
+// markup:
+// <footer class="o-footer {$modifiers}">
+//     <div class="o-footer__nav"><sg-insert>3.2.3</sg-insert></div>
+//     <div class="o-footer__footNote">
+//         <div class="o-footer__footNote__details">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</div>
+//         <div class="o-footer__footNote__social">
+//             <a href="#"><i class="a-icon-youtube"></i></a>
+//             <a href="#"><i class="a-icon-twitter"></i></a>
+//             <a href="#"><i class="a-icon-linkedin"></i></a>
+//             <a href="#"><i class="a-icon-facebook"></i></a>
+//             <a href="#"><i class="a-icon-mail_outline"></i></a>
+//         </div>
+//     </div>
+// </footer>
+//
+//
+// Styleguide 4.2
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Footeer
+// ==========================================================================
+
+@mixin o-footer() {
+
+	// Footer color
+	// ==========================================================================
+
+	.o-footer { @include atomic-color(( colorName: grey2, primeSelector: 'a', secondarySelector: '.m-navList > ul > li > ul a' )); }
+	.o-footer__footNote { @include atomic-color(( colorName: grey1, primeSelector: 'a' )); }
+
+	.o-footer--light { 
+		@include atomic-color(( colorName: grey6, primeSelector: 'a', secondarySelector: '.m-navList > ul > li > ul a' ));
+		.o-footer__footNote { @include atomic-color(( colorName: grey8, primeSelector: 'a' )); }
+	}
+
+	// Footer nav
+	// ==========================================================================
+	.o-footer__nav {
+		@include baseline-calc((
+			padding-top: 16,
+			padding-bottom: 16
+		));
+	}
+
+	// Footnote
+	// ==========================================================================
+	// Contains basic company info and social media links
+
+	.o-footer__footNote {
+		@include baseline-calc((
+			padding-top: 8,
+			padding-bottom: 8
+		));
+
+		// Details wrapper, should contain a single line of text
+		&__details {
+			text-align: center;
+			@include grid-row;
+			@include font-sizes(base)
+			@include baseline-calc((
+				padding-left: 2,
+				padding-right: 2,
+				margin-bottom: 8
+			));
+		}
+		&__social {
+			text-align: center;
+			@include grid-row;
+			@include baseline-calc(( margin-top: 4 ));
+
+			// Links
+			a {
+				text-decoration: none;
+				@include baseline-calc((
+					margin-left: 1,
+					margin-right: 1
+				));
+			}
+		}
+	}
+}
+
+// styleguide:ignore:end

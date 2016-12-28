@@ -1,0 +1,48 @@
+// Breadcrumps
+//
+// markup:
+// <nav class="m-navBread" aria-label="breadcrumb" role="navigation">
+//     <div class="row">
+//         <div class="columns small-12">
+//             <a class="u-font--prime" href="index.html" title="Home" rel="index up up up">Home</a>
+//  		   <sapn aria-hidden="true">/</span>
+//             <a class="u-font--prime" href="products.html" title="Products" rel="up up">Curabitur tortor</a>
+//             <sapn aria-hidden="true">/</span>
+//             <a class="u-font--prime">Praesent libero</a>
+//         </div>
+//     </div>
+// </nav>
+//
+// Styleguide 3.2.4
+
+// styleguide:ignore:start
+
+// Breadcrumbs
+// ==========================================================================
+
+@mixin m-navBread() {
+	.m-navBread {
+		position: relative;
+		display: block;
+		@include atomic-color(( 
+			colorName: grey8,
+			primeSelector: 'a'
+		));
+		@include baseline-calc((
+			padding-top: 4,
+			padding-bottom: 4
+		));
+		@include baseline-calc((
+			padding-top: 7,
+			padding-bottom: 7
+		), medium);
+		@include baseline-border( "top", 1px, 0, $type: "margin" );
+		a {
+			@include font-sizes('base');
+			@include baseline-calc(( margin-right: 1 )); 
+			text-transform: capitalize;
+		}
+	}
+}		
+
+// styleguide:ignore:end

@@ -1,0 +1,105 @@
+// Page Structure
+//
+// markup:
+// <div class="siteWrap sg-siteWrap">
+//     <div class="siteWrap__sideBar">
+//         <div class="styleguide-grid-unit" style="height: 100%;">
+//             <p>Sidebar content</p>
+//             <p><button class="a-button js-sideToggle">Side Bar</button></p>
+//         </div>
+//     </div>
+//     <div class="siteWrap__main">
+//         <div class="styleguide-grid-unit" style="height: 100%;">
+//             <p>Main content</p>
+//             <p><button class="a-button js-sideToggle">Side Bar</button></p>
+//         </div>
+//     </div>
+// </div>
+//
+// Styleguide 1.5
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$page-wrapper-class: 'siteWrap' !default;
+$page-sideBar-width: 300px !default;
+$page-style: $glob-page-style !default;
+$page-sideBar-shadow: $glob-shadow--l3 !default;
+$page-main-shadow: $glob-shadow--l2 !default;
+
+
+// ==========================================================================
+// Site wrapper mixin
+// ==========================================================================
+
+@mixin pageStrucutre() {
+	.#{$page-wrapper-class} {
+		position: relative;
+		display: flex;
+		@include atomic_color(( colorName: grey6, iconColor: false ));
+		
+		// Side Bar
+		// ==========================================================================
+		&__sideBar {
+			position: fixed;
+			display: block;
+			height: 100vh;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 20;
+			// Sdiebar close state, Use transform for performace beeints
+			// Open state is applies by parent modfiers so both sidebar and `.siteWrap__main` can be adjusted in one class
+			transform: translate3d(-100%, 0, 0);
+			transition: transform 0.25s $glob-anim-slide;
+			border-width: 0 1px 0 0;
+			border-style: solid;
+			background-color: inherit;
+			@include breakpoint(medium){
+				width: $page-sideBar-width;
+				transform: translate3d($page-sideBar-width * -1, 0, 0);
+			}
+		}
+
+		// Main content
+		// ==========================================================================
+		&__main {
+			position: relative;
+			display: block;
+			min-height: 100vh;
+			flex: 1 1 100%;
+			transition: margin-left 0.25s $glob-anim-slide;
+			max-width: 100vw;
+		}
+
+		// Open state
+		// ==========================================================================
+		&--sideOpen {
+			.#{$page-wrapper-class}__sideBar { transform: translate3d( 0, 0, 0 ); }
+			@media( min-width: 1200px + $page-sideBar-width ) {
+				.#{$page-wrapper-class}__sideBar { transform: translateX( 0 ); }
+				.#{$page-wrapper-class}__main { 
+					transition: margin-left 0.25s $glob-anim-slide;
+					margin-left: $page-sideBar-width;
+				}
+			}
+		}
+
+		// Theme styles
+		// ==========================================================================
+		// Easily customize page strucutre stylyes
+		@if ( $page-style == shadow ) {
+			&__sideBar { 
+				box-shadow: $page-sideBar-shadow; 
+				border-width: 0;
+			}
+			.o-header { box-shadow: $page-main-shadow; }
+		}
+
+	}
+}
+
+// styleguide:ignore:end

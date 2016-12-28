@@ -1,0 +1,176 @@
+// styleguide:ignore:start
+
+
+// ==========================================================================
+// Global variables
+// ==========================================================================
+//
+// All global variables should be prefixed with `glob-`
+//
+// 1. Animations
+// 2. Shadows
+// 3. Colors
+
+
+// 3. Colors
+// ==========================================================================
+// Make adjustement to these variables and not the maps directly
+
+// Color settings
+// --------------------------------------------------------------------------
+$glob-color-aspect-ratio: 4.5 !default;
+$glob-colorAlpha : 6 !default;
+$glob-color-higLight-not : '.m-card' !default;
+
+// Grey scale
+// --------------------------------------------------------------------------
+$glob-color-grey1: #000000 !default;
+$glob-color-grey2: #2c2c2c !default;
+$glob-color-grey3: #656567 !default;
+$glob-color-grey4: #c4c2c5 !default;
+$glob-color-grey5: #eaeaea !default;
+$glob-color-grey6: #f8f4f1 !default;
+$glob-color-grey7: #fbfaf8 !default;
+$glob-color-grey8: #FFFFFF !default;
+
+// Brand color
+// --------------------------------------------------------------------------
+$glob-color-brand: #2196F3 !default;
+$glob-color-brandLight: lighten( $glob-color-brand, $glob-colorAlpha ) !default;
+$glob-color-brandDark: darken( $glob-color-brand, $glob-colorAlpha ) !default;
+
+// Accent colors
+// --------------------------------------------------------------------------
+$glob-color-accent: #00E676 !default;
+$glob-color-accentLight: lighten( $glob-color-accent, $glob-colorAlpha ) !default;
+$glob-color-accentDark: darken( $glob-color-accent, $glob-colorAlpha ) !default;
+
+
+// Color maps
+// --------------------------------------------------------------------------
+// Specify child component colors i.e link colors, buttons etc.
+
+// High Light
+$glob-color-hiLgt: (
+	grey1: $glob-color-accent,
+	grey2: $glob-color-accent,
+	grey3: $glob-color-brand,
+	grey4: $glob-color-brand,
+	grey5: $glob-color-brand,
+	grey6: $glob-color-brand,
+	grey7: $glob-color-brand,
+	grey8: $glob-color-brand,
+	brand: $glob-color-accent,
+	brandLight: $glob-color-accent,
+	brandDark: $glob-color-accent,
+	accent: $glob-color-brand,
+	accentLight: $glob-color-brand,
+	accentDark: $glob-color-brand
+) !default;
+// Primary buttons
+$glob-color-buttons-secondary: (
+	grey1: $glob-color-grey8,
+	grey2: $glob-color-grey8,
+	grey3: $glob-color-grey8,
+	grey4: $glob-color-grey8,
+	grey5: $glob-color-grey1,
+	grey6: $glob-color-grey1,
+	grey7: $glob-color-grey1,
+	grey8: $glob-color-accent,
+	brand: $glob-color-grey8,
+	brandLight: $glob-color-grey8,
+	brandDark: $glob-color-grey8,
+	accent: $glob-color-grey8,
+	accentLight: $glob-color-grey8,
+	accentDark: $glob-color-grey8
+) !default;
+// Seondary buttons
+$glob-color-buttons: (
+	grey1: $glob-color-brand,
+	grey2: $glob-color-brand,
+	grey3: $glob-color-brand,
+	grey4: $glob-color-brand,
+	grey5: $glob-color-brand,
+	grey6: $glob-color-brand,
+	grey7: $glob-color-brand,
+	grey8: $glob-color-accentDark,
+	brand: $glob-color-grey8,
+	brandLight: $glob-color-grey8,
+	brandDark: $glob-color-grey8,
+	accent: $glob-color-grey8,
+	accentLight: $glob-color-grey8,
+	accentDark: $glob-color-grey8
+) !default;
+
+// Color map ( Never edit these variables )
+// --------------------------------------------------------------------------
+// Used by the color mixins
+
+$glob-color: (
+	grey1: $glob-color-grey1,
+	grey2: $glob-color-grey2,
+	grey3: $glob-color-grey3,
+	grey4: $glob-color-grey4,
+	grey5: $glob-color-grey5,
+	grey6: $glob-color-grey6,
+	grey7: $glob-color-grey7,
+	grey8: $glob-color-grey8,
+	brand: $glob-color-brand,
+	brandLight: $glob-color-brandLight,
+	brandDark: $glob-color-brandDark,
+	accent: $glob-color-accent,
+	accentLight: $glob-color-accentLight,
+	accentDark: $glob-color-accentDark
+) !default;
+
+// Fonts
+// ==========================================================================
+
+$glob-font-family: "robotoregular", Geneva, sans-serif !default;
+$glob-font-family-heading: "roboto_slabregular", Geneva, sans-serif !default;
+$glob-font-weight: 400 !default;
+
+
+// Shadows
+// ==========================================================================
+
+$glob-shadow--l1 : 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default;
+$glob-shadow--l2 : 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !default;
+$glob-shadow--l3 : 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !default;
+$glob-shadow--l4 : 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !default;
+$glob-shadow--l5 : 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !default;
+
+
+// Border Radius
+// ==========================================================================
+
+$glob-radius: 5px !default;
+
+
+// Grid settings
+// ==========================================================================
+
+$glob-max-site-width: 1200 !default;
+$glob-guuter-width-small: 1.5rem !default;
+$glob-guuter-width-medium: 1.5rem !default;
+
+
+// 1. Animations
+// ==========================================================================
+
+$glob-anim-grow: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
+$glob-anim-raise: cubic-bezier(0.7,0,0.6,1) !default;
+$glob-anim-spin: cubic-bezier(0.4, 0.0, 0.6, 1) !default;
+$glob-anim-fade: cubic-bezier(0.42, 0, 0.58, 1) !default;
+$glob-anim-slide: cubic-bezier(0.7,0,0.6,1) !default;
+
+
+// 5. Element Styles
+// ==========================================================================
+
+$glob-navHor-style: border !default;
+$glob-nav-prime-active: border !default; // material flat
+$glob-page-style: flat !default; // flat shadow
+$glob-card-style: flat !default; // flat border shadow
+
+// styleguide:ignore:end

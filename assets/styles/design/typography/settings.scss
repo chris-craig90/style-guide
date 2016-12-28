@@ -1,0 +1,63 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// BaselineCalc Settings
+// ==========================================================================
+
+
+// Baseline Breakpoints 
+// ==========================================================================
+// Copy foundation 6 Breakpoint map, alows us to add to the breakpoint list 
+// without afecting other components
+
+$typeBreakpoints : $breakpoints;
+
+// Baseline rest
+// ==========================================================================
+
+// | Name   | Base       | Smal        | Medium       | Large        | XL Large     | XXL Large    |
+// | ------ | ---------- | ----------- | ------------ | ------------ | ------------ | -------------|  
+$baselinRest : (
+	centi: ( (4, 1px, 0) , (4, 1px, 0) , (3, 5px, 0)  , (3, 5px, 0)  , (3, 5px, 0)  , (2, 3px, 0)  ),
+	deci:  ( (4, 0px, 0) , (4, 0px, 0) , (4, 1px, 0)  , (3, 4px, 0)  , (3, 4px, 0)  , (4, 0px, 0)  ),
+	base:  ( (4, 0px, 0) , (4, 0px, 0) , (4, 0px, 0)  , (4, 0px, 0)  , (4, 0px, 0)  , (4, 0px, 0)  ),
+	deca:  ( (4, 0px, 0) , (4, 0px, 0) , (4, 5px, 0)  , (5, 1px, 0)  , (5, 1px, 0)  , (5, 1px, 0)  ),
+	hecto: ( (4, 5px, 0) , (4, 5px, 0) , (5, 0px, 0)  , (6, 2px, 0)  , (6, 2px, 0)  , (6, 1px, 0)  ),
+	kilo:  ( (4, 5px, 0) , (4, 5px, 0) , (6, 1px, 0)  , (7, 3px, 0)  , (7, 3px, 0)  , (8, 3px, 0)  ),
+	mega:  ( (4, 4px, 0) , (4, 4px, 0) , (6, 5px, 0)  , (8, 3px, 0)  , (8, 3px, 0)  , (10, 4px, 0) ),
+	giga:  ( (5, 1px, 0) , (5, 1px, 0) , (8, 2px, 0)  , (9, 2px, 0)  , (9, 2px, 0)  , (12, 4px, 0) ),
+	tera:  ( (6, 3px, 0) , (6, 3px, 0) , (9, 2px, 0)  , (11, 3px, 0) , (11, 3px, 0) , (16, 1px, 0) ),
+	peta:  ( (6, 2px, 0) , (6, 2px, 0) , (10, 2px, 0) , (14, 0px, 0) , (14, 0px, 0) , (20, 1px, 0) ),
+	exa:   ( (6, 2px, 0) , (6, 2px, 0) , (13, 0px, 0) , (16, 5px, 0) , (16, 5px, 0) , (26, 3px, 0) ),
+);
+
+// BaselineCalc Settings
+// ==========================================================================
+$type-scale-settings: (
+  scale-keys    : (base, deca, hecto, kilo, mega, giga, tera, peta, exa),
+  neg-scale-keys: (deci, centi),
+  brk-pnts      : $typeBreakpoints,
+  font-sizes    : ( 1rem   , 1rem   , 1rem   , 1rem   , 1rem , 1rem   ),
+  scales        : ( 1.067  , 1.067  , 1.2    , 1.25   , 1.25 , 1.333  ),
+  baseline-size : ( 0.75rem , 0.75rem , 0.75rem , 0.75rem , 0.75rem , 0.75rem ),
+  baseline-resets : $baselinRest
+);
+
+
+// Build Type Scale
+// ==========================================================================
+$type-scale: build-type-scale(
+  $type-scale-settings
+);
+
+
+// Baseline Grid Overlay
+// ==========================================================================
+// example js:
+// var baselineGrid = $BLGRD('body').create();
+// baselineGrid.toggle();
+@include show-baseline();
+
+
+
+// styleguide:ignore:end

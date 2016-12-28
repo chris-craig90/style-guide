@@ -1,0 +1,216 @@
+// Icons
+//
+// markup:
+// <p class="u-font--kilo">
+// <i class="a-icon-mode_comment u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-more u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-more_horiz u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-more_vert u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-motorcycle u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-music_note u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-music_video u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-navigation u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-near_me u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-note u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-note_add u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-notifications u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-notifications_active u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-notifications_none u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-panorama u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-pause u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-pause_circle_filled u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-pause_circle_outline u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-person_outline u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-perm_media u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-person u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-photo_album u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-photo_filter u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-photo_size_select_actual u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-picture_as_pdf u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-play_circle_filled u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-playlist_add u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-playlist_add_check u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-plus_one u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-power_settings_new u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-queue_music u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-remove_shopping_cart u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-reorder u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-report u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-warning u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-restaurant u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-school u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-screen_lock_landscape u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-screen_lock_portrait u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-search u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-send u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-sentiment_dissatisfied u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-sentiment_neutral u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-sentiment_satisfied u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-sentiment_very_satisfied u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-shopping_basket u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-textsms u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-star_border u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-star_half u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-store_mall_directory u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-style u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-subscriptions u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-text_fields u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-thumbs_up_down u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-timeline u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-trending_down u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-trending_flat u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-trending_up u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i> 
+// <i class="a-icon-tune u-mr--1 u-ml--1 u-mb--2 u-mt--2"><i>
+// <i class="a-icon-verified_user u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-videogame_asset u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_carousel u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_column u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_compact u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_headline u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_module u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-view_quilt u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-volume_down u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-volume_mute u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-volume_off u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-volume_up u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-wallpaper u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-watch u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-web u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-weekend u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-widgets u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-work u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-youtube_searched_for u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-zoom_in u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-zoom_out u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-zoom_out_map u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-key2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-lock u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-unlocked u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-magic-wand u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-aid-kit u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-bug u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-pie-chart u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-stats-dots u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-trophy u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-spoon-knife u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-magnet u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-bin u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-power u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-switch u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-menu5 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-menu2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-menu3 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-menu4 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-sphere u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-earth u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-bookmark u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-bookmarks u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-sun u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-smile u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-smile2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-sad u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-sad2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-wink u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-wink2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-grin u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-warning2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-notification u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-info2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-cancel-circle u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-checkmark2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-infinite u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-circle-up u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-circle-right u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-circle-down u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-circle-left u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-insert-template u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-share u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-embed u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-embed2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-mail4 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-amazon u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-google u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-google-plus u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-hangouts u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-google-drive u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-facebook u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-facebook2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-spotify u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-twitter u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-rss2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-youtube u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-youtube2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-twitch u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-vimeo2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-flickr u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-dribbble u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-behance u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-dropbox u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-onedrive u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-github u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-basecamp u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-wordpress u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-tumblr2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-appleinc u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-android u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-windows8 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-skype u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-reddit u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-wikipedia u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-linkedin u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-linkedin2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-pinterest u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-pinterest2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-paypal u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-file-pdf u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-file-openoffice u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-file-word u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-html-five u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-html-five2 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-css3 u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-git u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// <i class="a-icon-svg u-mr--1 u-ml--1 u-mb--2 u-mt--2"></i>
+// </p>
+//
+// Styleguide 2.3
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Icons
+// ==========================================================================
+//
+// TODO
+// => Trim Icon set and add more examples to style guide. 
+// => Wrap icons in mixin for easiy inclusion/ excusion. Not possible due to @import 
+
+
+// Import icon styles
+// ==========================================================================
+// Icon font is generated using icomoon.io
+$icomoon-font-path: "../fonts";
+@import "../../fonts/a-icon/style";
+
+
+// Icon utilities
+// ==========================================================================
+[class*=" a-icon-"], 
+[class^=a-icon-] { 
+	//display: inherit;
+	vertical-align: baseline;
+	color: inherit;
+}
+
+
+// Icon sizes
+// ==========================================================================
+.a-icon--large{ @include font-sizes("deca", false); }
+.a-icon--xl{ @include font-sizes("hecto", false); }
+
+
+// Icon block
+// ==========================================================================
+// Makes icon fill container. Fixes some issues with a single icon placed inside buttons
+.a-icon--block { display: block; }
+
+// styleguide:ignore:end

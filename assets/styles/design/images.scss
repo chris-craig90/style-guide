@@ -1,0 +1,103 @@
+// Images
+//
+// Styleguide 1.4
+
+// Sqaure
+//
+// aspect ratio - 1:1
+//
+// markup:
+// <img src="/dist/images/demo/placeholder/square/mid1.jpg" sizes="(min-width: 36em) 33.3vw, 100vw"
+// srcset="/dist/images/demo/placeholder/square/mid1.jpg, /dist/images/demo/placeholder/lrg.jpg 0.8x,
+// /dist/images/demo/placeholder/square/xl.jpg 1024w">
+//
+// Styleguide 1.4.1
+
+// styleguide:ignore:start
+$image-square--xs: "/dist/images/demo/placeholder/square/xs1.jpg";
+$image-square--sml: "/dist/images/demo/placeholder/square/sml1.jpg";
+$image-square--smlIsh: "/dist/images/demo/placeholder/square/smlish1.jpg";
+$image-square--mid: "/dist/images/demo/placeholder/square/mid1.jpg";
+$image-square--lrg: "/dist/images/demo/placeholder/square/lrg1.jpg";
+$image-square--xl: "/dist/images/demo/placeholder/square/xl1.jpg";
+// styleguide:ignore:end
+
+// Banner
+//
+// aspect ratio - 5:3
+//
+// markup:
+// <img src="/dist/images/demo/placeholder/banner/mid1.jpg" sizes="(min-width: 36em) 33.3vw, 100vw"
+// srcset="/dist/images/demo/placeholder/banner/mid1.jpg, /dist/images/demo/placeholder/banner/mid1.jpg 0.8x,
+// /dist/images/demo/placeholder/banner/mid1.jpg 1024w">
+//
+// Styleguide 1.4.2
+
+// styleguide:ignore:start
+$image-banner--xs: "/dist/images/demo/placeholder/banner/xs1.jpg";
+$image-banner--sml: "/dist/images/demo/placeholder/banner/sml1.jpg";
+$image-banner--smlIsh: "/dist/images/demo/placeholder/banner/smlish1.jpg";
+$image-banner--mid: "/dist/images/demo/placeholder/banner/mid1.jpg";
+$image-banner--lrg: "/dist/images/demo/placeholder/banner/lrg1.jpg";
+$image-banner--xl: "/dist/images/demo/placeholder/banner/xl1.jpg";
+// styleguide:ignore:end
+
+
+// Logo
+//
+// Dark and light logo varients. Automitally show/ hidden tedening on BG color
+//
+// markup:
+// <div class="atm-logo">
+//     <img class="atm-logo__dark" src="/dist/images/demo/placeholder/logo/logo-dark.png">
+//     <img class="atm-logo__light" src="/dist/images/demo/placeholder/logo/logo-light.png">
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8"><sg-wrapper-content/></div>
+//
+// Styleguide 1.4.3
+
+
+// Logo mobile
+//
+// Dark and light logo varients. Automitally show/ hidden tedening on BG color
+//
+// markup:
+// <div class="atm-logo">
+//     <img class="atm-logo__dark" src="/dist/images/demo/placeholder/logo/logo-dark-mob.png">
+//     <img class="atm-logo__light" src="/dist/images/demo/placeholder/logo/logo-light-mob.png">
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8"><sg-wrapper-content/></div>
+//
+// Styleguide 1.4.4
+
+// styleguide:ignore:start
+.atm-logo { 
+	img { display: none; } 
+}
+// styleguide:ignore:end
+
+
+// styleguide:ignore:start
+
+
+// ==========================================================================
+// Image utils
+// ==========================================================================
+
+// Baseline image
+// ==========================================================================
+// Forces image height to match basline grid.
+// Class should only be applied via js using `$ATM().imageBaseline()`
+
+.js-baselineImage {
+	object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+
+// styleguide:ignore:end
+

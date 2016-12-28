@@ -1,0 +1,17 @@
+// Background color utilities
+// ==========================================================================
+// Loop `$glob-color` map and create new util class
+// Util classes that are generated will apply consitent text colours to child elements
+
+@each $name, $value in $glob-color {
+    // Background colour utils
+    %u-bg--#{$name},
+    .u-bg--#{$name} {
+        @include atomic_color(( 
+        	colorName: $name, 
+        	buttonColor: true,
+        	utils: true,
+        	logo: true
+        ));
+    }
+}

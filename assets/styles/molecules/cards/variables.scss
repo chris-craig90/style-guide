@@ -1,0 +1,37 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+// Default class name for card component. Allows you to overide class if causes sonficts.
+// @type String
+$cardClass : m-card !default;
+
+// Card border radius
+// @type Number
+$m-card-border: $glob-radius !default;
+
+// Card style. flat border shadow
+// @type String
+$m-card-style: $glob-card-style !default;
+
+// Card shadow value. Only used if `$m-card-style` is set to `shadow`
+// @type css box-shadow value. example: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+$m-card-shadow: $glob-shadow--l1 !default;
+
+// Thumb hover effect
+// @type {String}
+$m-card-hover-effect: shadow !default;
+
+// Card color settings
+// @type map
+$m-card-color-settings: (
+	colorName: 'grey8', 
+	buttonColor: true, 
+	secondarySelector: '.date', 
+	hiLgtSelector: '.category, &:focus .post-title, .m-card__text__cta a:hover:not([class])', 
+	primeSelector: '.a-hr--bold, .m-card__text__cta a:not([class])' 
+);
+
+// styleguide:ignore:end

@@ -1,0 +1,297 @@
+// Buttons
+//
+// :hover - Hover state
+// :focus - Focus
+// :disabled - Disabled
+//
+// markup:
+// <a class="a-button {$modifiers}">Donate</a>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8" style="background-color: transparent!important;"><sg-wrapper-content/></div>
+//
+// Styleguide 2.2
+
+
+// Button sizes
+//
+// .a-button - Regular Button
+// .a-button--large - large Button
+// .a-button--xl - XL button
+// .a-button--expand - Expanded button
+//
+// markup:
+// <a class="a-button {$modifiers}">Button</a>
+//
+// Styleguide 2.2.1
+
+
+// Hollow button
+//
+// markup:
+// <a class="a-button a-button--hollow">Donate</a>
+//
+// Styleguide 2.2.3
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Button vaiables
+// ==========================================================================
+
+// Button class name
+// @type String
+$atm-button-class: 'a-button' !default;
+
+// Border radius for buttons, defaulted to global-radius.
+// @type Number
+$atm-button-radius: $glob-radius !default;
+
+// Default background color for buttons.
+// @type Color
+$atm-button-background: $glob-color-brand !default;
+
+// Background color on hover for buttons.
+// @type Color
+$atm-button-background-hover: scale-color($atm-button-background, $lightness: -15%) !default;
+
+// Default fill for buttons. Can either be `solid` or `hollow`.
+// @type Keyword
+$atm-button-fill: solid !default;
+
+// Buttons sizes, define name, font scale and vettical and horizontal padding
+// @type Map
+$atm-button-sizes: (
+	base: (
+		font-size: 'base',
+		padding-vert: 1.5,
+		padding-hor: 2.5,
+	),
+	large: (
+		font-size: 'deca',
+		padding-vert: 1.5,
+		padding-hor: 3,
+	),
+	xl: (
+		font-size: 'kilo',
+		padding-vert: 2,
+		padding-hor: 4,
+	)
+) !default;
+
+
+// ==========================================================================
+// @mixin button-size()
+// ==========================================================================
+// @desciription Adds a dropdown arrow to a button.
+// @param {Map} Font size map
+
+@mixin button-size( $sizeMap ) {
+  $fontScale: map-get($sizeMap, font-size);
+  $padVert: map-get($sizeMap, padding-vert);
+  $padHor: map-get($sizeMap, padding-hor);
+  @include font-sizes(#{$fontScale}, false);
+  @include baseline-calc((
+  	padding: $padVert,
+  	padding-left: $padHor,
+  	padding-right: $padHor,
+  ));
+}
+
+// ==========================================================================
+// @mixin button-base()
+// ==========================================================================
+// @desciription Sets base button styles, applied to all button types
+
+@mixin button-base {
+  // @include disable-mouse-outline;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  -webkit-appearance: none;
+  transition: background-color 0.25s ease-out, color 0.25s $glob-anim-fade, box-shadow 0.25s $glob-anim-fade, color 0.25s $glob-anim-fade;
+  vertical-align: middle;
+  border-radius: $atm-button-radius;
+  margin: 0;
+  border: none;
+  text-decoration: none;
+  @include button-size( map-get($atm-button-sizes, 'base') );
+}
+
+// ==========================================================================
+// @mixin atomic_button-effects
+// ==========================================================================
+// @desciription Hover/ active efects
+
+@mixin atomic_button-effects( $style: 'ripple' ) {
+	&:hover { text-decoration: none; }
+	@if( $style == 'ripple' ) {
+		&:after {
+		  content: "";
+		  display: block;
+		  position: absolute;
+		  width: 100%;
+		  height: 100%;
+		  top: 0;
+		  left: 0;
+		  pointer-events: none;
+		  transition: background .5s, opacity 1s;
+		  background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+		  background-repeat: no-repeat;
+		  background-position: 50%;
+		  background-size: 1000% 1000%;
+		  opacity: 0;
+		}
+		&:active:after {
+		  background-size: 0 0;
+		  opacity: .2;
+		}
+	}
+	@elseif( $style == 'ripple-out' ) {
+		&:after {
+		  content: "";
+		  display: block;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  pointer-events: none;
+		  border-width: 0;
+		  border-style: solid;
+		  border-radius: inherit;
+		  opacity: 0;
+		  pointer-events: none;
+		}
+		&:hover:after {
+	    	animation-duration: 0.4s;
+  			animation-name: rippleOut;
+		}
+	}
+	// Defualt hover states
+	@else {
+	  &:hover{
+	  	box-shadow: $glob-shadow--l3;
+	  }
+	}
+}
+
+// ==========================================================================
+// @mixin a-button() [mixin]
+// ==========================================================================
+// @desciription Sets base button styles, applied to all button types
+
+@mixin a-button {  
+	.#{$atm-button-class} {
+		@include button-base;
+
+		// Button sizes
+		// ==========================================================================
+	    @each $size, $sizeMap in map-remove($atm-button-sizes, default) {
+	      &--#{$size} {
+	          @include button-size( $sizeMap );
+	      }
+	    }
+
+		// Button widths
+	    // ==========================================================================
+	    &--expand {
+	    	display: block;
+	    	width: 100%;
+	    }
+	    &--wide {
+	    	@include baseline-calc(( min-width: 30 ));
+	    	max-width: 100%;
+	    }
+
+	    // Hollow button
+	    // ==========================================================================
+	    &--hollow {
+	    	@include baseline-border( "both", 1px, 0, $type: "margin" );
+	    	border-width: 1px;
+	    }
+
+	    // Button states
+	    // ==========================================================================
+	    &.disbaled,
+      	&.pseudo-class-disabled,
+      	&[disabled] { 
+      		pointer-events: none;
+      		opacity: 0.7;
+      	}
+
+      	// Hover effects
+      	// ==========================================================================
+      	@include atomic_button-effects('ripple-out');
+	}
+}
+
+// ==========================================================================
+// Button color mixin
+// ==========================================================================
+@mixin a-button_color($colorName) {
+	$bgColor: map-get($glob-color, $colorName);
+    background: $bgColor;
+    color: get-txt-colour($colorName, 'prime');
+    border-color: $bgColor;
+
+    // Hover effects
+    &:after { border-color: $bgColor; }
+        
+    &:hover,
+    &.pseudo-class-hover,
+    &:focus,
+    &.pseudo-class-focus {
+	    @if ( lightness($bgColor) > 60 ){
+	     	background-color: scale-color( $bgColor, $lightness: 80%);
+	    }@else{
+	    	background-color: scale-color( $bgColor, $lightness: -30%);
+	    }
+    	@if $bgColor == #fff {
+	        background-color: $glob-color-grey4;
+	    }
+	    @if $bgColor == #000 {
+	        background-color: $glob-color-grey3;
+	    }
+    }
+}
+
+// ==========================================================================
+// Button color modifiers
+// ==========================================================================
+@mixin a-button_color_mods() {
+	&--brand { @include a-button_color(brand); }
+	&--accent { @include a-button_color(accent); }
+	&--accentDark { @include a-button_color(accentDark); }
+	&--grey { @include a-button_color(grey4); }
+	&--white { @include a-button_color(grey8); }
+	&--black { @include a-button_color(grey1); }
+}
+
+
+// ==========================================================================
+// Button Animations
+// ==========================================================================
+@keyframes rippleOut {
+  5% {
+    border-width: 0px;
+	top: -3px;
+	left: -3px;
+	right: -3px;
+	bottom: -3px;
+    opacity: 0.8; 
+  }
+  80% {
+    border-width: 3px;
+	top: -8px;
+	left: -8px;
+	right: -8px;
+	bottom: -8px;
+  }
+  100% {
+    opacity: 0; 
+  }
+}
+
+// styleguide:ignore:end

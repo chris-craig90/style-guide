@@ -1,0 +1,59 @@
+// Button Group
+//
+// Button groups are containers for related action items. They're great when you need to display a group of actions in a bar. These build off the button styles and work perfectly with the grid.
+//
+// markup:
+// <div class="a-buttonGroup">
+//   <a class="a-button">One</a>
+//   <a class="a-button">Two</a>
+//   <a class="a-button">Three</a>
+// </div>
+//
+// sg-wrapper:
+// <div class="u-bg--grey8"><sg-wrapper-content/></div>
+//
+// Styleguide 2.4
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Button Groups
+// ==========================================================================
+
+// Variables
+// ==========================================================================
+
+// Button group class name
+// @type String
+$atm-buttonGroup-class: 'a-buttonGroup' !default;
+
+// Button group border-radius, if $glob-radius is 0, set defualt to 5px.
+// @type Number
+$atm-button-group-radius: $glob-radius !default;
+@if( $glob-radius == 0 ) { $atm-button-group-radius: 5px; }
+
+
+// Main strucutre
+// ==========================================================================
+
+@mixin a-buttonGroup() {
+	.#{$atm-buttonGroup-class} {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+
+		.#{$atm-button-class} { 
+			border-radius: 0;
+			border-width: 0 1px 0 0;
+			border-style: solid;
+			&:first-child { border-radius: $atm-button-group-radius 0 0 $atm-button-group-radius; }
+			&:last-child { 
+				border-radius: 0 $atm-button-group-radius $atm-button-group-radius 0; 
+				border-width: 0;
+			}
+		}
+	}
+}
+
+
+// styleguide:ignore:end

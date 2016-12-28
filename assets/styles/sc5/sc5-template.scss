@@ -1,0 +1,277 @@
+// styleguide:ignore:start
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+// SC5 body color
+// @type String - color map property name
+$sc5-body-color: grey8 !default;
+
+// SC5 header color
+// @type String - color map property name
+$sc5-header-color: #2196F3 !default;
+
+// SC5 nav activer color
+// @type String - color map property name
+$sc5-active-color: #00E676 !default;
+
+// SC5 nav height
+// @type Number
+$sc5-nav-height: 12 !default;
+
+// SC5 section color
+// @type String - color map property name
+$sc5-section-color: $sc5-body-color !default;
+
+// SC5 section header
+// @type Number
+$sc5-section-heading-color: lighten( $sc5-header-color, $glob-colorAlpha ) !default;
+
+
+// ==========================================================================
+// Globl
+// ==========================================================================
+
+body { @include atomic_color(( colorName: $sc5-body-color)); }
+
+
+// ==========================================================================
+// Header
+// ==========================================================================
+
+header.sg.sg-header{
+	background-color: $sc5-header-color;
+	@include baseline-calc((
+		padding-top: 4,
+		padding-bottom: 4
+	));
+}
+
+// Header content wrapper
+// ==========================================================================
+
+.sg.sg-header .sg-inner { @include flex-grid-row(); }
+
+
+// Header title
+// ==========================================================================
+
+.sg.sg-header .sg-title {
+	@include flex-grid-column(12);
+	@include breakpoint(large) {
+		@include flex-grid-column(8);
+	}
+}
+
+
+// Search container
+// ==========================================================================
+
+.sg.sg-header .sg.sg-search-container {
+	display: flex;
+	align-items: center;
+	@include flex-grid-column(12);
+	@include breakpoint(large) {
+		@include flex-grid-column(4);
+	}
+}
+
+
+// Search field
+// ==========================================================================
+
+.sg.sg-header .sg.sg-search-container .sg.sg-search-field {
+	background-color: #fff;
+	margin: 0;
+}
+
+
+// ==========================================================================
+// Navigation
+// ==========================================================================
+
+
+// Menu wraper
+// ==========================================================================
+
+.sg.sg-top-nav {
+	background-color: $sc5-header-color;
+}
+
+// Menu
+// ==========================================================================
+
+.sg.sg-top-nav-menu { 
+	@include flex-grid-row(); 
+}
+
+
+// Menu Items
+// ==========================================================================
+
+.sg.sg-top-nav-menu li { 
+	background-color: transparent;
+	padding-bottom: 0;
+}
+
+// Menu Links
+.sg.sg-top-nav-menu > li > a {
+	position: relative;
+	@include baseline-calc(( line-height: $sc5-nav-height ));
+	color: inherit;
+    transition: background-color 0.25s $glob-anim-fade, color 0.2s $glob-anim-fade, border-color 0.2s $glob-anim-fade;
+}
+
+// Hover/ active states
+.sg.sg-top-nav-menu > li > a:hover, 
+.sg.sg-top-nav-menu > li > a.active {
+	background-color: darken( $sc5-header-color, $glob-colorAlpha );
+}
+
+// Ref no's
+.sg.sg-top-nav-menu > li > a .sg-ref {
+	color: inherit!important;
+}
+
+// Parent active
+.sg.sg-top-nav-menu > li > a.sub-active {
+	@include baseline-calc(( line-height: $sc5-nav-height ));
+	border: none;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background-color: $sc5-active-color;
+		@include baseline-calc(( height: 0.5 ));
+	}
+}
+
+
+// Sub menu items
+// ==========================================================================
+
+.sg.sg-top-nav-menu li:hover ul { 
+	@include baseline-calc(( top: $sc5-nav-height ));
+}
+
+.sg.sg-top-nav-menu li:hover ul li a, 
+.sg.sg-top-nav-menu li ul li a.active { 
+	color: inherit;
+	transition: color 0s ease;
+}
+
+// Hover/ active states
+.sg.sg-top-nav-menu a:hover, 
+.sg.sg-top-nav-menu a.active, 
+.sg.sg-top-nav-menu li:hover ul li a:hover, 
+.sg.sg-top-nav-menu li ul li a.active {
+	@include atomic_color(( colorName: grey2 ));
+}
+
+// Ref no's
+.sg.sg-top-nav-menu li:hover ul li a .sg-ref, 
+.sg.sg-top-nav-menu li ul li a.active .sg-ref {
+	color: inherit;
+}
+
+
+
+// ==========================================================================
+// Content wrapper
+// ==========================================================================
+
+.sg.sg-wrapper { 
+	@include flex-grid-row();
+}
+
+
+// ==========================================================================
+// Code Section
+// ==========================================================================
+
+.sg.sg-section { @include baseline-calc(( margin-bottom: 12 )); }
+
+// Header 
+// ==========================================================================
+.sg.sg-section-header {
+	@include atomic_color(( colorName: $sc5-section-color ));
+}
+
+// Title link
+.sg.sg-section-header a { color: inherit; }
+
+// Title
+.sg.sg-section-header h1 {
+	display: flex;
+    align-items: baseline;
+	padding-left: 0;
+	padding-right: 0;
+	padding: 0;
+	color: $sc5-section-heading-color; 
+	@include baseline-border( "bottom", 1px, 4, $type: "margin" );
+	@include baseline-calc(( padding-bottom: 1 ));
+	//border-color: rgba( $sc5-section-heading-color, 0.5);
+	border-color: inherit;
+}
+
+// Sections heading
+.sg.sg-section-header h1 > span:nth-child(2) { 
+	margin: 0;
+	order: 1;
+	@include font-sizes(kilo);
+	@include baseline-calc(( margin-left: 1 )); 
+}
+
+// Ref no
+.sg.sg-section-header h1 .sg-reference-number { 
+	order: 0;
+	color: $sc5-section-heading-color; 
+	@include font-sizes(deci);
+}
+
+// Section source
+.sg.sg-section-header h1 .sg-section-source { 
+	order: 3;
+	margin-top: auto;
+    bottom: 0;
+    float: none;
+    margin-left: auto;
+	color: $sc5-section-heading-color; 
+	@include font-sizes(deci);
+}
+
+// Link icon
+.sg.sg-section-header i.fa { display: none; }
+
+
+// Description
+// ==========================================================================
+.sg.sg-section .sg.sg-section-partial[ng-if*="section.description"] {
+	padding: 0;
+	border: none;
+	@include baseline-calc(( margin-bottom: 4 )); 
+}
+
+
+// Makup preview
+// ==========================================================================
+.sg.sg-section .sg.sg-section-partial[ng-if*="section.markup"] {
+	box-shadow: $glob-shadow--l1;
+}
+
+// Modofer Preiew
+[ng-repeat-start="mod in section.modifiers"] + .sg.sg-section-partial {
+	box-shadow: $glob-shadow--l1;
+}
+
+// CSS
+// ==========================================================================
+.sg.sg-section .sg.sg-section-partial[ng-if*="section.css"] {
+	display: none!important;
+}
+
+// styleguide:ignore:end
+

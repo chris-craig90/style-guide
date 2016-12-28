@@ -1,0 +1,30 @@
+
+// Font sizes
+// ==========================================================================
+h1.sg, h2.sg, h3.sg, h4.sg, h5.sg { margin: 0; }
+.sg.u-font--exa {
+  @include font-sizes("exa");
+}
+.sg.u-font--peta {
+  @include font-sizes("peta");
+}
+.sg.u-font--tera {
+  @include font-sizes("tera");
+}
+.sg.u-font--giga {
+  @include font-sizes("giga");
+}
+.sg.u-font--mega {
+  @include font-sizes("mega");
+}
+.sg.u-font--kilo {
+  @include font-sizes("kilo");
+}
+.sg.u-font--hecto {
+  @include font-sizes("hecto");
+}
+.sg.u-font--deca {
+  @include font-sizes("deca");
+}
+
+p.sg { @include font-sizes("base");  }

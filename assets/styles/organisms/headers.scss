@@ -1,0 +1,328 @@
+// ==========================================================================
+// Page header
+// ==========================================================================
+
+// Headers
+//
+// Styleguide 4.1
+
+// styleguide:ignore:start
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+// Header size
+// @type Number
+$atm-header-size: 13 !default;
+
+// Header size large
+// @type Number
+$atm-header-size-large: 19 !default;
+
+// Header size XL
+// @type Number
+$atm-header-size-xl: 27 !default;
+
+
+// ==========================================================================
+// Appbar
+// ==========================================================================
+// Appbars are used to group rerlated naovgation controls.
+// Multiple app bars can be used inside the header element.
+// Modifer class's are avable to alter the height and color of appbars,
+// Use grid utils to layout content inside app bar
+
+@mixin o-header_appBar() {
+	&__appBar {
+		position: relative;
+		@include grid-row-fullWidth();
+		align-items: stretch;
+		flex-wrap: nowrap;
+
+		// App bar height
+		// --------------------------------------------------------------------------
+		@include baseline-calc(( min-height: $atm-header-size ));
+		&--large { @include baseline-calc(( min-height: $atm-header-size-large )); }
+		&--xl { @include baseline-calc(( min-height: $atm-header-size-xl )); }
+
+		// Color
+		// --------------------------------------------------------------------------
+		@include atomic_color(( colorName: grey8, buttonColor: true, logo: true, primeSelector: 'a' ));
+		&--dark { @include atomic_color(( colorName: grey2, buttonColor: true, logo: true, primeSelector: 'a' )); }
+		&--brand { @include atomic_color(( colorName: brand, buttonColor: true, logo: true, primeSelector: 'a' )); }
+
+		// Logo 
+		// --------------------------------------------------------------------------
+		&__logo {
+			position: relative;
+			display: flex;
+    		align-items: center;
+    		padding-left: map-get($grid-column-gutter, small) * 0.5;
+    		padding-right: map-get($grid-column-gutter, small) * 0.5;
+    		max-width: 220px;
+
+			@include baseline-calc(( 
+				padding-top: 2, 
+				padding-bottom: 2
+			));
+			img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+			}
+		}
+
+		// Main nav 
+		// --------------------------------------------------------------------------
+		&__nav {
+			position: relative;
+			display: none;
+    		align-items: stretch;
+			width: 100%;
+			padding-left: map-get($grid-column-gutter, small) * 0.5;
+    		padding-right: map-get($grid-column-gutter, small) * 0.5;
+			@include breakpoint( large ) {
+				display: flex;
+			}
+		}
+
+		// System nav 
+		// --------------------------------------------------------------------------
+		&__nav--right {
+			position: relative;
+			display: flex;
+    		align-items: stretch;
+    		margin-left: auto;
+    		padding-left: map-get($grid-column-gutter, small) * 0.5;
+    		padding-right: map-get($grid-column-gutter, small) * 0.5;
+		}
+		
+		// Info secion
+		// --------------------------------------------------------------------------
+		&__info {
+			position: relative;
+			display: flex;
+		    justify-content: center;
+		    flex-direction: column;
+    		margin-left: auto;
+    		padding-left: map-get($grid-column-gutter, small) * 0.5;
+    		padding-right: map-get($grid-column-gutter, small) * 0.5;
+		}
+	}
+}
+
+// ==========================================================================
+// Trasmaorent app bars
+// ==========================================================================
+
+@mixin o-header_transparent() {
+	&--transMid.o-header--trans--hasSplash {
+		position: absolute;
+		z-index: 10;
+		@include atomic_color(( colorName: grey1, backgroundColor: false, textColor: false, primeSelector: '[class*="a-icon"]' ));
+		@include  baseline-border( "bottom", 1px, 0, $type: "margin" );
+
+		.o-header__appBar--mid { background-color: transparent; }
+		.m-navHor { @include atm_nav-color(trans) }
+		.m-navHor>ul>li { border-width: 0; }
+		.atm-logo__dark { display: none; }
+		.atm-logo__light { display: block; }
+		+ .o-splash { 
+			@include baseline-calc(( padding-top: ($atm-header-size) )); 
+			@include baseline-calc(( min-height: ($atm-header-size) + 62 ), medium); 
+			@include baseline-calc(( min-height: ($atm-header-size) + 78 ), large); 
+			@include baseline-calc(( min-height: ($atm-header-size) + 106 ), xlarge); 
+		}
+	}
+	&--transLarge.o-header--trans--hasSplash {
+		position: absolute;
+		z-index: 10;
+		.o-header__appBar--large { background-color: transparent; }
+		+ .o-splash { 
+			@include baseline-calc(( padding-top: ($atm-header-size-large + $atm-header-size) )); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 62 ), medium); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 78 ), large); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 106 ), xlarge); 
+		}
+	}
+	&--transLarge_Mid.o-header--trans--hasSplash {
+		position: absolute;
+		z-index: 10;
+		.o-header__appBar--large { background-color: transparent; }
+		.o-header__appBar--mid { background-color: transparent; }
+		
+		.m-navHor { @include atm_nav-color(trans) }
+
+		+ .o-splash { 
+			@include baseline-calc(( padding-top: ($atm-header-size-large + $atm-header-size) )); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 62 ), medium); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 78 ), large); 
+			@include baseline-calc(( min-height: ($atm-header-size-large + $atm-header-size) + 106 ), xlarge); 
+		}
+	}
+	&--transXl.o-header--trans--hasSplash {
+		position: absolute;
+		z-index: 10;
+		.o-header__appBar--xl { background-color: transparent; }
+		+ .o-splash { 
+			@include baseline-calc(( padding-top: ($atm-header-size-xl + $atm-header-size) )); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 62 ), medium); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 78 ), large); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 106 ), xlarge); 
+		}
+	}
+	&--transXl_Mid.o-header--trans--hasSplash {
+		position: absolute;
+		z-index: 10;
+		.o-header__appBar--xl { background-color: transparent; }
+		.o-header__appBar--mid { background-color: transparent; }
+		
+		.m-navHor { @include atm_nav-color(trans) }
+
+		+ .o-splash { 
+			@include baseline-calc(( padding-top: ($atm-header-size-xl + $atm-header-size) )); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 62 ), medium); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 78 ), large); 
+			@include baseline-calc(( min-height: ($atm-header-size-xl + $atm-header-size) + 106 ), xlarge); 
+		}
+	}
+}
+
+// ==========================================================================
+// Header styles
+// ==========================================================================
+
+.o-header {
+	position: relative;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 100%;
+	//z-index: 1;
+
+	// App bar
+	@include o-header_appBar();
+
+	// Transaprent app bars
+	@include o-header_transparent();
+}
+
+// styleguide:ignore:end
+
+
+// Basic header
+//
+// markup:
+// <div class="o-header">
+//     <div class="o-header__appBar o-header__appBar--light">
+//         <a class="o-header__appBar__logo" href="#">
+// 	           <sg-insert>1.4.4</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__nav">
+// 	           <sg-insert>3.2.1-1</sg-insert>
+//         </div>
+//         <div class="o-header__appBar__nav--right">
+//             <button class="js-sideToggle"><i class="a-icon-dehaze a-icon--large"></i></button>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <sg-wrapper-content/>
+// <style>.o-header { position: relative; }</style>
+//
+// Styleguide 4.1.1
+
+
+// Company bar
+//
+// markup:
+// <div class="o-header o-header--hasXl">
+//     <div class="o-header__appBar o-header__appBar--xl show-for-large">
+//         <a class="o-header__appBar__logo" href="#">
+// 	           <sg-insert>1.4.3</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__info">
+//             <div class="u-font--right u-w--100">
+//                 <p><a class="a-button a-button--large a-button--wide a-button--accentDark u-ml--auto">Donate</a></p>
+//                 <p class="u-pb--0 u-font--deca">Speak to us: <a href="#">0141 554 3068</a></p>
+//             </div>
+//         </div>
+//     </div>
+//     <div class="o-header__appBar o-header__appBar--brand">
+//         <a class="o-header__appBar__logo hide-for-large" href="#">
+// 	           <sg-insert>1.4.4</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__nav">
+// 	           <sg-insert>3.2.1-2</sg-insert>
+//         </div>
+//         <div class="o-header__appBar__nav--right">
+//             <button class="js-sideToggle"><i class="a-icon-dehaze a-icon--large"></i></button>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <sg-wrapper-content/>
+// <style>.o-header { position: relative; }</style>
+//
+// Styleguide 4.1.2
+
+
+// Solid Large
+//
+// markup:
+// <div class="o-header">
+//     <div class="o-header__appBar o-header__appBar--large o-header__appBar--brand show-for-large">
+//         <a class="o-header__appBar__logo" href="#">
+// 	           <sg-insert>1.4.3</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__info">
+//             <div class="u-font--right u-w--100">
+//                 <sg-insert>3.4.2.1</sg-insert>
+//             </div>
+//         </div>
+//     </div>
+//     <div class="o-header__appBar o-header__appBar--brand">
+//         <a class="o-header__appBar__logo hide-for-large" href="#">
+// 	           <sg-insert>1.4.4</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__nav">
+// 	           <sg-insert>3.2.1-4</sg-insert>
+//         </div>
+//         <div class="o-header__appBar__nav--right">
+//             <button class="js-sideToggle"><i class="a-icon-dehaze a-icon--large"></i></button>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <sg-wrapper-content/>
+// <style>.o-header { position: relative; }</style>
+//
+// Styleguide 4.1.3
+
+
+// Trnsaprent 
+//
+// markup:
+// <div class="o-header o-header--transMid">
+//     <div class="o-header__appBar o-header__appBar--mid o-header__appBar--light">
+//         <a class="o-header__appBar__logo" href="#">
+// 	           <sg-insert>1.4.4</sg-insert>
+//         </a>
+//         <div class="o-header__appBar__nav">
+// 	           <sg-insert>3.2.1-1</sg-insert>
+//         </div>
+//         <div class="o-header__appBar__nav--right">
+//             <button class="js-sideToggle"><i class="a-icon-dehaze a-icon--large"></i></button>
+//         </div>
+//     </div>
+// </div>
+//
+// sg-wrapper:
+// <sg-wrapper-content/>
+// <style>.o-header { position: relative; }</style>
+//
+// Styleguide 4.1.4

@@ -1,0 +1,74 @@
+// ==========================================================================
+// WP Rests
+// ==========================================================================
+//
+// 1. Event Calendar
+
+
+// ==========================================================================
+// Ninja forms
+// ==========================================================================
+.nf-form-cont h3 { @include font-sizes('deca') }
+
+.nf-form-fields-required{
+	opacity: 0.5;
+	@include baseline-calc((
+		padding-bottom: 4
+	));
+}
+
+.nf-form-cont [type="button"] { 
+	@extend .a-button; 
+	width: 100%;
+    line-height: initial;
+}
+
+nf-field:last-child .nf-field-container { margin-bottom: 0!important; }
+
+// ==========================================================================
+// 1. Event Calendar
+// ==========================================================================
+
+// Event filter
+#tribe-events-bar {
+	@include baseline-border( "both", 1px, 0 );
+	border-width: 1px;
+	border-color: inherit;
+} 
+
+
+// Widget calendar title
+// --------------------------------------------------------------------------
+.tribe-events-title {
+	margin-bottom: 0!important;
+	padding: 0 0 0.5rem 0!important;
+}
+.tribe-mini-calendar div[id*='daynum-'] a {
+    padding: 15px 0 20px!important
+}
+.tribe-mini-calendar .tribe-events-has-events div[id*='daynum-'] a:before{
+	bottom: 10px!important;
+}
+.tribe-mini-calendar-nav{
+	border: none!important;
+}
+.tribe-mini-calendar-nav div {
+    padding-top: 1rem!important;
+    border: none!important;
+}
+
+// Caladenr Cells
+// --------------------------------------------------------------------------
+.tribe-mini-calendar-no-event {
+	padding: 1rem 0 1rem 0!important;
+}
+.tribe-mini-calendar th { 
+	padding: 1rem 0 1rem 0!important;
+	border: none!important;
+}
+.tribe-mini-calendar td:last-child {
+	border-right: 0!important;
+}
+.tribe-mini-calendar td:first-child {
+	border-left: 0!important;
+}
