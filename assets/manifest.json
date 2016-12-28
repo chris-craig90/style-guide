@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "main.js": {
+      "bower": ["jquery", "lodash"],
+      "files": [
+        "scripts/plugins/modernizr/modernizr.js",
+        "scripts/styleguide/baselinegrid.js",
+        "scripts/styleguide/horizontalgrid.js",
+        "scripts/styleguide/sc5.js",
+        "scripts/atomic.sg.js",
+        "scripts/main.js"
+      ],
+      "main": true
+    },
+    "atomic.sg.js": {
+      "bower": ["jquery", "lodash"],
+      "files": [
+        "scripts/plugins/modernizr/modernizr.js",
+        "scripts/atomic.sg.js"
+      ],
+      "main": true
+    },
+    "main.css": {
+      "files": [
+        "styles/main.scss"
+      ],
+      "main": true
+    }
+  },
+  "config": {
+    "devUrl": "http://style-guide.dev/style-guide/static-sg/",
+    "styleguideUrl": "http://localhost:7000/",
+    "dist": "/dev-area/styleguide/"
+  },
+  "paths": {
+    "dist": "dev-area/dist/",
+    "production": "dev-area/production/",
+    "source": "assets/"
+  }
+}
