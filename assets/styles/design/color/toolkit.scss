@@ -151,7 +151,8 @@
       primeSelector: '',
       secondarySelector: '',
       hiLgtSelector: '',
-      transBG: false, 
+      transBG: false,
+      linkColor: false,
       alpha: 0.7,
       logo: false,
     );
@@ -168,6 +169,7 @@
     $transBG: map-get($settings, backgroundColor);
     $alpha: map-get($settings, alpha);
     $textColor: map-get($settings, textColor);
+    $linkColor: map-get($settings, linkColor);
     $iconColor: map-get($settings, iconColor);
     $buttonColor: map-get($settings, buttonColor);
     $utils: map-get( $settings, utils );
@@ -188,6 +190,10 @@
     @if ( $textColor == true ) {
       color: get-txt-colour($colorName, 'prime');
       border-color: get-txt-colour($colorName, 'dividers');
+    }
+
+    // Link Colors
+    @if ( $linkColor == true ) {
       a { color: get-txt-colour($colorName, 'hiLgt'); }
     }
 

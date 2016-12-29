@@ -39,10 +39,7 @@
 //             </div>
 //         </div>
 //     </div>
-//     <div class="m-card m-card--mid m-card--brand m-card--bgImg large-4">
-//         <div class="m-card__thumb">
-//             <sg-insert>1.4.2</sg-insert>
-//         </div>
+//     <div class="m-card m-card--mid m-card--brand large-4">
 //         <div class="m-card__text">
 //             <div class="m-card__text__title">
 //                 <h3 class="u-font--deca">Suspendisse elementum urna</h3>
@@ -75,6 +72,10 @@
 		@include baseline-border();
 		@include baseline-border( "both", 1px, 0, "margin" );
 		border-width: 1px 0 1px 1px;
+		
+		.m-card,
+		.m-card__thumb,
+		.m-card__thumb img { border-radius: 0; }
 
 		.m-card__text {
 			border-width: 0 1px 0 0;

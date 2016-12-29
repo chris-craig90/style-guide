@@ -83,7 +83,7 @@
             // SC5 Template setup
             var sc5Template = $SC5();
             sc5Template
-              .demo([ 'placeholder', 'bakery', 'bike', 'peek' ])
+              .demo([ 'placeholder', 'star-wars', 'bakery', 'bike', 'peek' ])
               .templateSwitch([ '4.1.2', '4.1.1', '4.1.3', '4.1.4' ]); // Demo images
           }
 

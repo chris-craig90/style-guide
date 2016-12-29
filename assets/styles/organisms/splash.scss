@@ -32,6 +32,7 @@
 		flex-wrap: wrap;
 		overflow: hidden;
 
+
 		// Offset
 		// ==========================================================================
 		// Aligns content to the top of spash and increse top spacing.
@@ -41,6 +42,7 @@
 			@include baseline-calc(( padding-top: 14 ),medium); 
 			@include baseline-calc(( padding-top: 18 ),large); 
 		}
+
 
 		// Splash sizes
 		// ==========================================================================
@@ -57,6 +59,7 @@
 		}
 		&--screen { min-height: 100vh; }
 
+
 		// Splash color
 		// ==========================================================================
 		
@@ -65,9 +68,9 @@
 		@mixin splash-overlay( $color ) {
 		    &.o-splash--overlay .o-splash__bg:before { background:  linear-gradient(to bottom, rgba($color, 0.4) 0%, rgba($color, 0.6) 100%); }
 		    &.o-splash--overlayStrong .o-splash__bg {
-		        height: 100%;
-		        max-height: 120vh;
-		        &:before { background:  linear-gradient(to bottom, rgba($color, 0.4) 0%, rgba($color, 1) 70%); }
+		        //height: 100%;
+		        //max-height: 120vh;
+		        &:before { background:  linear-gradient(to bottom, rgba($color, 0.4) 0%, rgba($color, 1) 80%); }
 		    }
 		}
 		
@@ -83,8 +86,8 @@
 		    @include splash-overlay($glob-color-grey8); // Background overlays
 		}
 		&--dark {
-		    @include atomic-color(( colorName: 'grey2', buttonColor: true));
-		    @include splash-overlay($glob-color-grey2); // Background overlays
+		    @include atomic-color(( colorName: 'grey1', buttonColor: true));
+		    @include splash-overlay($glob-color-grey1); // Background overlays
 		}
 		&--grey {
 		    @include atomic-color(( colorName: 'grey5', buttonColor: true));
@@ -95,6 +98,7 @@
 		    @include splash-overlay($glob-color-accent); // Background overlays
 		}
 
+
 		// Parallax
 		// ==========================================================================
 		&--parallax {
@@ -104,12 +108,14 @@
 			}
 		}
 
+
 		// Section dividers
 		// ==========================================================================
 		&--dividers {
 			border-style: solid;
 			@include  baseline-border( "top", 1px, 0, $type: "margin" );
 		}
+
 
 		// Arrow
 		// ==========================================================================
@@ -134,6 +140,7 @@
 		&--arrow--brand:before { border-top-color: $glob-color-brand; }
 		&--arrow--accent:before { border-top-color: $glob-color-accent; }
 		
+
 		// Spalsh BG
 		// ==========================================================================
 		&__bg {

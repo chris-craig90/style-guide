@@ -40,20 +40,23 @@ $atm-header-size-xl: 27 !default;
 		align-items: stretch;
 		flex-wrap: nowrap;
 
+
 		// App bar height
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		@include baseline-calc(( min-height: $atm-header-size ));
 		&--large { @include baseline-calc(( min-height: $atm-header-size-large )); }
 		&--xl { @include baseline-calc(( min-height: $atm-header-size-xl )); }
 
+
 		// Color
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		@include atomic_color(( colorName: grey8, buttonColor: true, logo: true, primeSelector: 'a' ));
 		&--dark { @include atomic_color(( colorName: grey2, buttonColor: true, logo: true, primeSelector: 'a' )); }
 		&--brand { @include atomic_color(( colorName: brand, buttonColor: true, logo: true, primeSelector: 'a' )); }
 
+
 		// Logo 
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		&__logo {
 			position: relative;
 			display: flex;
@@ -73,8 +76,9 @@ $atm-header-size-xl: 27 !default;
 			}
 		}
 
+
 		// Main nav 
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		&__nav {
 			position: relative;
 			display: none;
@@ -87,8 +91,9 @@ $atm-header-size-xl: 27 !default;
 			}
 		}
 
+
 		// System nav 
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		&__nav--right {
 			position: relative;
 			display: flex;
@@ -98,8 +103,9 @@ $atm-header-size-xl: 27 !default;
     		padding-right: map-get($grid-column-gutter, small) * 0.5;
 		}
 		
+
 		// Info secion
-		// --------------------------------------------------------------------------
+		// ==========================================================================
 		&__info {
 			position: relative;
 			display: flex;
@@ -120,7 +126,7 @@ $atm-header-size-xl: 27 !default;
 	&--transMid.o-header--trans--hasSplash {
 		position: absolute;
 		z-index: 10;
-		@include atomic_color(( colorName: grey1, backgroundColor: false, textColor: false, primeSelector: '[class*="a-icon"]' ));
+		@include atomic_color(( colorName: grey1, backgroundColor: false, textColor: true, primeSelector: '[class*="a-icon"]' ));
 		@include  baseline-border( "bottom", 1px, 0, $type: "margin" );
 
 		.o-header__appBar--mid { background-color: transparent; }
